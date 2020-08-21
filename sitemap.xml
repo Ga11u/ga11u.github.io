@@ -8,6 +8,11 @@
   </url>
   
   <url>
+    <loc>https://ga11u.github.io/tag/blazegraph/</loc>
+    <lastmod>2020-08-21T10:52:25+02:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://ga11u.github.io/category/blazegraph/</loc>
     <lastmod>2020-08-21T10:52:25+02:00</lastmod>
   </url>
@@ -33,6 +38,11 @@
   </url>
   
   <url>
+    <loc>https://ga11u.github.io/tag/news-angler/</loc>
+    <lastmod>2020-08-21T10:52:25+02:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://ga11u.github.io/category/news-angler/</loc>
     <lastmod>2020-08-21T10:52:25+02:00</lastmod>
   </url>
@@ -43,12 +53,27 @@
   </url>
   
   <url>
+    <loc>https://ga11u.github.io/tag/semantic-technologies/</loc>
+    <lastmod>2020-08-21T10:52:25+02:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://ga11u.github.io/category/semantic-technologies/</loc>
     <lastmod>2020-08-21T10:52:25+02:00</lastmod>
   </url>
   
   <url>
+    <loc>https://ga11u.github.io/tag/software-architecture/</loc>
+    <lastmod>2020-08-21T10:52:25+02:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://ga11u.github.io/category/software-architecture/</loc>
+    <lastmod>2020-08-21T10:52:25+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ga11u.github.io/tags/</loc>
     <lastmod>2020-08-21T10:52:25+02:00</lastmod>
   </url>
   
@@ -66,10 +91,6 @@
   
   <url>
     <loc>https://ga11u.github.io/talk/</loc>
-  </url>
-  
-  <url>
-    <loc>https://ga11u.github.io/tags/</loc>
   </url>
   
 </urlset>
