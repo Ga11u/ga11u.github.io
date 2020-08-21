@@ -30,7 +30,7 @@
   
     
   
-  <meta name="description" content="">
+  <meta name="description" content="Blazegraph is an open source large triple-stores (more than ~1B triples) designed for RDF and SPARQL following the W3C and semantic web standards such as Jena TDB1. Blazegraph, as many other large triple-stores, is not supporting scaling out (horisontal scaling) in its open surce versions, instead, they only suport scale up.">
 
   
   <link rel="alternate" hreflang="en-us" href="https://ga11u.github.io/post/expanding_blazegraph/">
@@ -249,7 +249,7 @@
   <meta property="og:site_name" content="Marc Page">
   <meta property="og:url" content="https://ga11u.github.io/post/expanding_blazegraph/">
   <meta property="og:title" content="Expanding Blazegraph | Marc Page">
-  <meta property="og:description" content=""><meta property="og:image" content="https://ga11u.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png">
+  <meta property="og:description" content="Blazegraph is an open source large triple-stores (more than ~1B triples) designed for RDF and SPARQL following the W3C and semantic web standards such as Jena TDB1. Blazegraph, as many other large triple-stores, is not supporting scaling out (horisontal scaling) in its open surce versions, instead, they only suport scale up."><meta property="og:image" content="https://ga11u.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png">
   <meta property="twitter:image" content="https://ga11u.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png"><meta property="og:locale" content="en-us">
   
     
@@ -299,7 +299,7 @@
       "url": "https://ga11u.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_192x192_fill_lanczos_center_2.png"
     }
   },
-  "description": ""
+  "description": "Blazegraph is an open source large triple-stores (more than ~1B triples) designed for RDF and SPARQL following the W3C and semantic web standards such as Jena TDB1. Blazegraph, as many other large triple-stores, is not supporting scaling out (horisontal scaling) in its open surce versions, instead, they only suport scale up."
 }
 </script>
 
@@ -633,6 +633,8 @@
   <h1>Expanding Blazegraph</h1>
 
   
+  <p class="page-subtitle">Expanding Blazegraph using Terraform and Ansible on a OpenStack cloud platform for News Angler project</p>
+  
 
   
     
@@ -668,7 +670,7 @@
   
   <span class="middot-divider"></span>
   <span class="article-reading-time">
-    0 min read
+    2 min read
   </span>
   
 
@@ -708,7 +710,27 @@
   <div class="article-container">
 
     <div class="article-style">
-      
+      <p>Blazegraph is an open source large triple-stores (more than ~1B triples) designed for RDF and SPARQL following the W3C and semantic web standards such as Jena TDB<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>. Blazegraph, as many other large triple-stores, is not supporting scaling out (horisontal scaling) in its open surce versions, instead, they only suport scale up.</p>
+<p>In the case of Blazegraph we found in the Blazegraph Blog (<a href="https://blog.blazegraph.com/">https://blog.blazegraph.com/</a>) the following information about High Availability (HA) and Scale-out features:</p>
+<blockquote>
+<h3 id="enterprise-features-ha-and-scale-out">Enterprise Features (HA and Scale-out)</h3>
+<p>Starting in release 2.0.0, the Scale-out and HA capabilities are moved to Enterprise features. These are available to uses with support and/or license subscription. If you are an existing GPLv2 user of these features, we have some easy ways to migrate. Contact us for more information. We’d like to make it as easy as possible.</p>
+</blockquote>
+<p>Which is corroborated by Bryan Thompson (@thompsonbry), the Chief Scientist and founder of SYSTAP and one of the contributors of Blazegraph, in the issue #116 at Blazegraph/database GitHub (<a href="https://github.com/blazegraph/database/issues/116):">https://github.com/blazegraph/database/issues/116):</a></p>
+<blockquote>
+<p>The HA configuration is not functional in more recent releases. Systap halted development of the Blazegraph HA feature several years ago (long before we came to Amazon).  Full HA is a complex thing to develop and maintain with master failure, testing of the various failover configurations, longevity testing, targeted failure mode tests, etc.  We self-funded quite a bit, but we did not get the engagement from the open source community to make it worth while to continue HA as an open source feature.</p>
+<p>You can always do the poor man&rsquo;s HA, put the updates onto a durable queue, and then apply writes to each server in parallel.  You would need to handle master failover of course.  Or you can capture the IChangeLog from one server and replicate the post-facto changes (in terms of statements added and removed) to the other servers, again using a durable queue to capture the post-commit change set.  To do the latter, you would also need to report additions to the dictionary indices (which is not currently done, but which would not be that difficult to add in the LexiconRelation and an apply loop interface for the replicas to apply the deltas on their local indices).  I think this might &ldquo;just work&rdquo;.  The local journal tracks the transactions in flight and manages the recycling of deleted records once no transaction can read on those records.  So transactional access to data should &ldquo;work&rdquo; on the replicas without doing anything else. Again, you would need to handle master failover, etc.</p>
+<p>Thanks, Bryan</p>
+</blockquote>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p><a href="https://www.w3.org/wiki/LargeTripleStores">https://www.w3.org/wiki/LargeTripleStores</a> <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section>
+
     </div>
 
     
