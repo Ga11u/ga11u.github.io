@@ -30,7 +30,7 @@
 &lt;/blockquote&gt;
 &lt;p&gt;Currently, since Blazegraph was taken over by Amazon (Neptune AWS), the project does not seem to be activly maintained. However, it is possible to scale-out Blazegraph and configure with HA clusters.&lt;/p&gt;
 &lt;p&gt;To set up a Clustered or HA version of Blazegraph the first requirment is to set up a shared disk volume which will be accessed by all nodes. Thus, contrary to other well-known big data soulutions like Apache Cassandra, all nodes are accessing to the same data instances and not to their own copies/versions. Zookeeper manages the services running on each node and the access to the knowledge graph is rotated along the nodes.&lt;/p&gt;
-&lt;p&gt;Yet, due to the lack of documentation and support for clustered and HA Blazegraph deployment, the scale-out option is only for those fearless adventurers who wants to try out a clustered and HA version of Blazegraph. A guide about how to deploy the clustered configuration can be found here &lt;a href=&#34;https://github.com/blazegraph/database/wiki/ClusterGuide&#34;&gt;https://github.com/blazegraph/database/wiki/ClusterGuide&lt;/a&gt; with the following advice: &lt;code&gt;We recommend that you ask for help when attempting your first cluster install!&lt;/code&gt;; the HA configuration is explained here: &lt;a href=&#34;https://github.com/blazegraph/database/wiki/HAJournalServer#Basic_Deployment;&#34;&gt;https://github.com/blazegraph/database/wiki/HAJournalServer#Basic_Deployment;&lt;/a&gt; and a example with Wikidata deployment of Blazegraph can be found here: &lt;a href=&#34;https://wikitech.wikimedia.org/wiki/Nova_Resource:Wikidata-query/Documentation&#34;&gt;https://wikitech.wikimedia.org/wiki/Nova_Resource:Wikidata-query/Documentation&lt;/a&gt; (the author of this post doesn&amp;rsquo;t take responsabilities for your failed attempts or disasters &amp;ndash; if you success, I will like to hear and lear how you have manage it : smile : )&lt;/p&gt;
+&lt;p&gt;Yet, due to the lack of documentation and support for clustered and HA Blazegraph deployment, the scale-out option is only for those fearless adventurers who wants to try out a clustered and HA version of Blazegraph. A guide about how to deploy the clustered configuration can be found here &lt;a href=&#34;https://github.com/blazegraph/database/wiki/ClusterGuide&#34;&gt;https://github.com/blazegraph/database/wiki/ClusterGuide&lt;/a&gt; with the following advice: &lt;code&gt;We recommend that you ask for help when attempting your first cluster install!&lt;/code&gt;; the HA configuration is explained here: &lt;a href=&#34;https://github.com/blazegraph/database/wiki/HAJournalServer#Basic_Deployment;&#34;&gt;https://github.com/blazegraph/database/wiki/HAJournalServer#Basic_Deployment;&lt;/a&gt; and a example with Wikidata deployment of Blazegraph can be found here: &lt;a href=&#34;https://wikitech.wikimedia.org/wiki/Nova_Resource:Wikidata-query/Documentation&#34;&gt;https://wikitech.wikimedia.org/wiki/Nova_Resource:Wikidata-query/Documentation&lt;/a&gt; (the author of this post doesn&amp;rsquo;t take responsabilities for your failed attempts or disasters &amp;ndash; if you success, I will like to hear and lear how you have manage it 😄 )&lt;/p&gt;
 &lt;p&gt;Still, the stand-alone version Blazegraph is a really interesting option for working with open source triple-store which can manage big data volumes.&lt;/p&gt;
 </description>
     </item>
@@ -41,7 +41,7 @@
       <pubDate>Fri, 21 Aug 2020 10:52:25 +0200</pubDate>
       <guid>https://ga11u.github.io/post/triplestore_scale_out/</guid>
       <description>&lt;p&gt;Semantic technologies are really interesting from a Big Data prespective. Yet, these technologies together with semantic web resources enhance Knowledge Graphs by providing reacher means for representing and defining facts, concepts, properties, relations and logic-rules, while facilitating knowledge graph understanding, integration and manipulation by using ontologies, standard vocabularies and linking its concepts to Linked Open Data (LOD) resources such as Wikidata, Schema.org or DBPedia. Nevertheless, Big Data cames with its known challanges like the need for systems that are able to scale-up and -out (vertical and horisontal scaling). Thus, semantic technologies and more precicely triple-stores which support RDF and SPARQL following the W3C and semantic web standards (i.e., the databases designed for storing knowledge graphs represented with triples in RDF and query them with SPARQL) must adapt and be redesigned to facilitate horisonal and vertical scaling.&lt;/p&gt;
-&lt;p&gt;So far, the scale-up seems to be solved with the large triple-stores&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt; that can handle big data volumes by adding more resources. E.g., propiertary triple-stores like the Spatial and Graph features in Oracle Database, the AnzoGraph DB and the AllegroGraph that can deal more than ~1T (10&lt;sup&gt;12&lt;/sup&gt;) triples or open-source triple stores like the Virtuoso Open Source Edition (~58.58B = $~58.58x10|^2$&lt;sup&gt;9&lt;/sup&gt;), the Blazegraph (~12.7B)  and the Jena TDB (~1.7B). As we can see, in terms of dealing with big data volumes, open-source solutions are behind of those propiertary or licensing alternatives. But, the question that arises is: &lt;strong&gt;Are those numbers big enough?&lt;/strong&gt; According to Orgacle&amp;rsquo;s white paper&lt;sup id=&#34;fnref:2&#34;&gt;&lt;a href=&#34;#fn:2&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;, 1T triples can represent:&lt;/p&gt;
+&lt;p&gt;So far, the scale-up seems to be solved with the large triple-stores&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt; that can handle big data volumes by adding more resources. E.g., propiertary triple-stores like the Spatial and Graph features in Oracle Database, the AnzoGraph DB and the AllegroGraph that can deal more than ~1T (10&lt;sup&gt;12&lt;/sup&gt;) triples or open-source triple stores like the Virtuoso Open Source Edition (~58.58B = ~58.58x10&lt;sup&gt;9&lt;/sup&gt;), the Blazegraph (~12.7B)  and the Jena TDB (~1.7B). As we can see, in terms of dealing with big data volumes, open-source solutions are behind of those propiertary or licensing alternatives. But, the question that arises is: &lt;strong&gt;Are those numbers big enough?&lt;/strong&gt; According to Orgacle&amp;rsquo;s white paper&lt;sup id=&#34;fnref:2&#34;&gt;&lt;a href=&#34;#fn:2&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;, 1T triples can represent:&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;ul&gt;
 &lt;li&gt;1000 tweets for every one of the 1B Twitter users.&lt;/li&gt;
@@ -53,8 +53,71 @@
 &lt;li&gt;10 facts about each of the 107B people who ever lived.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;On the other hand, when talking about scale-out solutions for large triple-stores we find that scale-out solutions are offered by most of the propiertary platforms or only in licensing versions like Virtuoso Enterprise Edition, with the exception of Blazegraph which is the only open source platform that offers scale-out.&lt;/p&gt;
-&lt;p&gt;So what? What can we do if we need to scale-out triple-stores and we want to use and support open-source projects?&lt;/p&gt;
+&lt;p&gt;On the other hand, when talking about scale-out solutions for large triple-stores we find that scale-out solutions are offered by most of the propiertary platforms or only in licensing versions like Virtuoso Enterprise Edition, with the exception of Blazegraph which is the only open source platform that offers scale-out. 
+
+
+
+
+
+
+  
+    &lt;div class=&#34;pub-list-item&#34; style=&#34;margin-bottom: 1rem&#34;&gt;
+  &lt;i class=&#34;far fa-file-alt pub-icon&#34; aria-hidden=&#34;true&#34;&gt;&lt;/i&gt;
+
+  
+  
+
+  &lt;span class=&#34;article-metadata li-cite-author&#34;&gt;
+    
+
+  
+  &lt;span &gt;Marc Gallofré&lt;/span&gt;
+  &lt;/span&gt;
+  (2020).
+  &lt;a href=&#34;https://ga11u.github.io/post/blazegraph-scale/&#34;&gt;Scaling-out Blazegraph, is it possible?&lt;/a&gt;.
+  
+  &lt;p&gt;
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+  
+    
+  
+
+
+
+
+
+
+
+
+
+
+&lt;/p&gt;
+
+  
+  
+&lt;/div&gt;
+
+  
+
+&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;So what? What can we do if we need to scale-out triple-stores and we want to use and support open-source projects?&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;Some projects Jena TDB + HBase or Graph DBs with RDF/SPARQL/Gremlin&lt;/p&gt;
 &lt;section class=&#34;footnotes&#34; role=&#34;doc-endnotes&#34;&gt;
 &lt;hr&gt;
