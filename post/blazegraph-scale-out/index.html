@@ -30,7 +30,7 @@
   
     
   
-  <meta name="description" content="Blazegraph is a high performance scale-out triple-store for big data which can support up to ~12.7B triples in a single machine (see previous post). Even though it is presented as an ultra high-performance graph database and designed to scale-out, the scale-out feature has not been that much supported as developers would wish.">
+  <meta name="description" content="Blazegraph is a high performance scale-out triple-store for big data which can support up to ~12.7B triples in a single machine (see previous post ). Even though it is presented as an ultra high-performance graph database and designed to scale-out, the scale-out feature has not been that much supported as developers would wish.">
 
   
   <link rel="alternate" hreflang="en-us" href="https://ga11u.github.io/post/blazegraph-scale-out/">
@@ -249,7 +249,7 @@
   <meta property="og:site_name" content="Marc Page">
   <meta property="og:url" content="https://ga11u.github.io/post/blazegraph-scale-out/">
   <meta property="og:title" content="Scaling-out Blazegraph, is it possible? | Marc Page">
-  <meta property="og:description" content="Blazegraph is a high performance scale-out triple-store for big data which can support up to ~12.7B triples in a single machine (see previous post). Even though it is presented as an ultra high-performance graph database and designed to scale-out, the scale-out feature has not been that much supported as developers would wish."><meta property="og:image" content="https://ga11u.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png">
+  <meta property="og:description" content="Blazegraph is a high performance scale-out triple-store for big data which can support up to ~12.7B triples in a single machine (see previous post ). Even though it is presented as an ultra high-performance graph database and designed to scale-out, the scale-out feature has not been that much supported as developers would wish."><meta property="og:image" content="https://ga11u.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png">
   <meta property="twitter:image" content="https://ga11u.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png"><meta property="og:locale" content="en-us">
   
     
@@ -299,7 +299,7 @@
       "url": "https://ga11u.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_192x192_fill_lanczos_center_2.png"
     }
   },
-  "description": "Blazegraph is a high performance scale-out triple-store for big data which can support up to ~12.7B triples in a single machine (see previous post). Even though it is presented as an ultra high-performance graph database and designed to scale-out, the scale-out feature has not been that much supported as developers would wish."
+  "description": "Blazegraph is a high performance scale-out triple-store for big data which can support up to ~12.7B triples in a single machine (see previous post ). Even though it is presented as an ultra high-performance graph database and designed to scale-out, the scale-out feature has not been that much supported as developers would wish."
 }
 </script>
 
@@ -748,7 +748,7 @@
 
     <div class="article-style">
       <p>Blazegraph is a high performance scale-out triple-store for big data which can support up to ~12.7B triples in a single machine (see previous 
-<a href="/post/triplestores-scale-out/">post</a>). Even though it is presented as an ultra high-performance graph database and designed to scale-out, the scale-out feature has not been that much supported as developers would wish.</p>
+<a href="/post/triplestores-scale-out/">post</a> ). Even though it is presented as an ultra high-performance graph database and designed to scale-out, the scale-out feature has not been that much supported as developers would wish.</p>
 <p>At the beginning (from the 2.0.0 release), the scale-out was moved to a Enterprise fueture under licence supriptions, as we can see from  the following information about High Availability (HA) and Scale-out features in the Blazegraph Blog (<a href="https://blog.blazegraph.com/):">https://blog.blazegraph.com/):</a></p>
 <blockquote>
 <p><strong>Enterprise Features (HA and Scale-out)</strong></p>
@@ -761,8 +761,9 @@
 <p>Thanks, Bryan</p>
 </blockquote>
 <p>Currently, since Blazegraph was taken over by Amazon (Neptune AWS), the project does not seem to be activly maintained. However, it is possible to scale-out Blazegraph and configure with HA clusters.</p>
-<p>To set up a Clustered or HA version of Blazegraph the first requirment is to set up a shared disk volume which will be accessed by all nodes. Thus, contrary to other well-known big data soulutions like Apache Cassandra, all nodes are accessing to the same data instances and not to their own copies/versions. Zookeeper manages the services running on each node and the access to the knowledge graph is rotated along the nodes.</p>
-<p><img src="scale-out-bg.svg" alt="Blazegraph scale-out configuration">
+<p>The Blazegraph scale-out architecture (Figure 1) is based 
+on a shared disk volume where all Blazegraph&rsquo;s nodes have access to the data. This shared disck volume can be set-up accross different machines, racks or regions with servies like Gluster. A load balancer distributes the data requests and updates between the Blazegraph&rsquo;s nodes and Zookeeper manages the services running on each node.</p>
+<p><img src="scale-out-bg.svg" alt="Blazegraph scale-out architecture">
 
 
 
@@ -778,10 +779,10 @@
 
 
 
-<figure id="figure-blazegraph-scale-out-configuration">
+<figure id="figure-blazegraph-scale-out-architecture">
 
 
-  <a data-fancybox="" href="" data-caption="Blazegraph scale-out configuration">
+  <a data-fancybox="" href="" data-caption="Blazegraph scale-out architecture">
 
 
   <img src="" alt=""  >
@@ -790,20 +791,20 @@
 
   
   
-  <figcaption>
-    Blazegraph scale-out configuration
+  <figcaption data-pre="Figure " data-post=":" class="numbered">
+    Blazegraph scale-out architecture
   </figcaption>
 
 
 </figure>
 </p>
-<p>Yet, due to the lack of documentation and support for clustered and HA Blazegraph deployment, the scale-out option is only for those fearless adventurers who wants to try out a clustered and HA version of Blazegraph. A guide about how to deploy the clustered configuration can be found here <a href="https://github.com/blazegraph/database/wiki/ClusterGuide">https://github.com/blazegraph/database/wiki/ClusterGuide</a> with the following advice: <code>We recommend that you ask for help when attempting your first cluster install!</code>; the HA configuration is explained here: <a href="https://github.com/blazegraph/database/wiki/HAJournalServer#Basic_Deployment;">https://github.com/blazegraph/database/wiki/HAJournalServer#Basic_Deployment;</a> and a example with Wikidata deployment of Blazegraph can be found here: <a href="https://wikitech.wikimedia.org/wiki/Nova_Resource:Wikidata-query/Documentation">https://wikitech.wikimedia.org/wiki/Nova_Resource:Wikidata-query/Documentation</a></p>
+<p>The Blazegraph scale-out architecture provides with horisontal scaling as both nodes an disks space can be extended. However, this architecture does not provide of distributed data along each node, as it would be the case of Apache Cassandra.</p>
+<p>Due to the lack of documentation and support for clustered and HA Blazegraph deployment, the scale-out option is only for those fearless adventurers who wants to try out the clustered and HA version of Blazegraph. A guide about how to deploy the clustered configuration can be found at <a href="https://github.com/blazegraph/database/wiki/ClusterGuide">https://github.com/blazegraph/database/wiki/ClusterGuide</a> with the following advice: <code>We recommend that you ask for help when attempting your first cluster install!</code>, the HA configuration is explained at <a href="https://github.com/blazegraph/database/wiki/HAJournalServer#Basic_Deployment,">https://github.com/blazegraph/database/wiki/HAJournalServer#Basic_Deployment,</a> and a example with the Wikidata deployment of Blazegraph can be found at <a href="https://wikitech.wikimedia.org/wiki/Nova_Resource:Wikidata-query/Documentation">https://wikitech.wikimedia.org/wiki/Nova_Resource:Wikidata-query/Documentation</a> (the author of this post doesn&rsquo;t take responsabilities for your failed attempts or disasters &ndash; if you success, I will like to hear and lear how you have manage it 😄).</p>
 <div class="alert alert-note">
   <div>
-    The author of this post doesn&rsquo;t take responsabilities for your failed attempts or disasters &ndash; if you success, I will like to hear and lear how you have manage it 😄
+    Still, the stand-alone version Blazegraph is a really interesting option for working with an open source triple-store which can manage big data volumes while providing high performance and support for RDF, SPARQL 1.1 and Gremlin.
   </div>
 </div>
-<p>Still, the stand-alone version Blazegraph is a really interesting option for working with open source triple-store which can manage big data volumes.</p>
 
     </div>
 
