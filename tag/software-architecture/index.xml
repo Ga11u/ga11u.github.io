@@ -17,9 +17,9 @@
       <link>https://ga11u.github.io/post/blazegraph-scale/</link>
       <pubDate>Wed, 26 Aug 2020 10:26:28 +0200</pubDate>
       <guid>https://ga11u.github.io/post/blazegraph-scale/</guid>
-      <description>&lt;p&gt;Blagraph is a high performance scale-out triple-store for big data which can support up to ~12.7B triples in a single machine (see previous 
-&lt;a href=&#34;https://ga11u.github.io/post/triplestore_scale_out/&#34;&gt;post&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;At the beginning (from the 2.0.0 release), the scale-out was moved to a Enterprise fueture under licence supriptions, as we can see from  the following information about High Availability (HA) and Scale-out features in the Blazegraph Blog (&lt;a href=&#34;https://blog.blazegraph.com/&#34;&gt;https://blog.blazegraph.com/&lt;/a&gt;) :&lt;/p&gt;
+      <description>&lt;p&gt;Blazegraph is a high performance scale-out triple-store for big data which can support up to ~12.7B triples in a single machine (see previous 
+&lt;a href=&#34;https://ga11u.github.io/post/triplestore_scale_out/&#34;&gt;post&lt;/a&gt;. Even though it is presented as an ultra high-performance graph database and designed to scale-out, the scale-out feature has not been that much supported as developers would wish.&lt;/p&gt;
+&lt;p&gt;At the beginning (from the 2.0.0 release), the scale-out was moved to a Enterprise fueture under licence supriptions, as we can see from  the following information about High Availability (HA) and Scale-out features in the Blazegraph Blog (&lt;a href=&#34;https://blog.blazegraph.com/):&#34;&gt;https://blog.blazegraph.com/):&lt;/a&gt;&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;Enterprise Features (HA and Scale-out)&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;Starting in release 2.0.0, the Scale-out and HA capabilities are moved to Enterprise features. These are available to uses with support and/or license subscription. If you are an existing GPLv2 user of these features, we have some easy ways to migrate. Contact us for more information. We’d like to make it as easy as possible.&lt;/p&gt;
