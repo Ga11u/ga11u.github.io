@@ -30,7 +30,9 @@
 &lt;li&gt;10 facts about each of the 107B people who ever lived.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;On the other hand, when talking about scale-out solutions for large triple-stores we find that scale-out solutions are offered by most of the propiertary platforms or only in licensing versions like Virtuoso Enterprise Edition, with the exception of Blazegraph which is the only open source platform that offers scale-out. 
+&lt;p&gt;On the other hand, when talking about scale-out solutions for large triple-stores we find that scale-out solutions are offered by most of the propiertary platforms or only in licensing versions like Virtuoso Enterprise Edition, with the exception of Blazegraph which is the only open source platform that offers scale-out.&lt;/p&gt;
+&lt;p&gt;To know more about Blazegraph scale-out possibilities, you can read:
+
 
 
 
@@ -49,19 +51,91 @@
 
 
 
+
+
   
 
 
-&lt;div class=&#34;view-list-item&#34;&gt;
-  &lt;i class=&#34;far fa-newspaper pub-icon&#34; aria-hidden=&#34;true&#34;&gt;&lt;/i&gt;
-  &lt;a href=&#34;https://ga11u.github.io/post/blazegraph-scale/&#34; &gt;Scaling-out Blazegraph, is it possible?&lt;/a&gt;
+&lt;div class=&#34;media stream-item&#34;&gt;
+  &lt;div class=&#34;media-body&#34;&gt;
 
+    &lt;h3 class=&#34;article-title mb-0 mt-0&#34;&gt;
+      &lt;a href=&#34;https://ga11u.github.io/post/blazegraph-scale/&#34; &gt;Scaling-out Blazegraph, is it possible?&lt;/a&gt;
+    &lt;/h3&gt;
+
+    
+    &lt;a href=&#34;https://ga11u.github.io/post/blazegraph-scale/&#34; class=&#34;summary-link&#34;&gt;
+      &lt;div class=&#34;article-style&#34;&gt;
+        Blagraph was presented as a high performance scale-out triple-store for big data in it initials and it can support up to ~12.7B triples in a single machine. At the beginning (from the 2.
+      &lt;/div&gt;
+    &lt;/a&gt;
+    
+
+    &lt;div class=&#34;stream-meta article-metadata&#34;&gt;
+
+      
+
+      
+        
+
+
+&lt;div class=&#34;article-metadata&#34;&gt;
+
+  
+  
+  
+  
+  &lt;div&gt;
+    
+
+  
+  &lt;span &gt;Marc Gallofré&lt;/span&gt;
+  &lt;/div&gt;
+  
+  
+
+  
+  &lt;span class=&#34;article-date&#34;&gt;
+    
+    
+      
+    
+    Aug 26, 2020
+  &lt;/span&gt;
   
 
   
 
   
+  &lt;span class=&#34;middot-divider&#34;&gt;&lt;/span&gt;
+  &lt;span class=&#34;article-reading-time&#34;&gt;
+    4 min read
+  &lt;/span&gt;
+  
 
+  
+  
+  
+
+  
+  
+  &lt;span class=&#34;middot-divider&#34;&gt;&lt;/span&gt;
+  &lt;span class=&#34;article-categories&#34;&gt;
+    &lt;i class=&#34;fas fa-folder mr-1&#34;&gt;&lt;/i&gt;&lt;a href=&#34;https://ga11u.github.io/category/news-angler/&#34;&gt;News Angler&lt;/a&gt;, &lt;a href=&#34;https://ga11u.github.io/category/blazegraph/&#34;&gt;Blazegraph&lt;/a&gt;, &lt;a href=&#34;https://ga11u.github.io/category/software-architecture/&#34;&gt;Software Architecture&lt;/a&gt;, &lt;a href=&#34;https://ga11u.github.io/category/semantic-technologies/&#34;&gt;Semantic technologies&lt;/a&gt;&lt;/span&gt;
+  
+
+&lt;/div&gt;
+
+      
+    &lt;/div&gt;
+
+    
+
+  &lt;/div&gt;
+  &lt;div class=&#34;ml-3&#34;&gt;
+    
+    
+  &lt;/div&gt;
 &lt;/div&gt;
 
   
