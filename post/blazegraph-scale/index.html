@@ -760,9 +760,7 @@
 </blockquote>
 <p>Currently, since Blazegraph was taken over by Amazon (Neptune AWS), the project does not seem to be activly maintained. However, it is possible to scale-out Blazegraph and configure with HA clusters.</p>
 <p>To set up a Clustered or HA version of Blazegraph the first requirment is to set up a shared disk volume which will be accessed by all nodes. Thus, contrary to other well-known big data soulutions like Apache Cassandra, all nodes are accessing to the same data instances and not to their own copies/versions. Zookeeper manages the services running on each node and the access to the knowledge graph is rotated along the nodes.</p>
-<p><img src="scale-out-bg.svg" alt="Blazegraph scale-out configuration"></p>
-<p>Yet, due to the lack of documentation and support for clustered and HA Blazegraph deployment, the scale-out option is only for those fearless adventurers who wants to try out a clustered and HA version of Blazegraph. A guide about how to deploy the clustered configuration can be found here <a href="https://github.com/blazegraph/database/wiki/ClusterGuide">https://github.com/blazegraph/database/wiki/ClusterGuide</a> with the following advice: <code>We recommend that you ask for help when attempting your first cluster install!</code>; the HA configuration is explained here: <a href="https://github.com/blazegraph/database/wiki/HAJournalServer#Basic_Deployment;">https://github.com/blazegraph/database/wiki/HAJournalServer#Basic_Deployment;</a> and a example with Wikidata deployment of Blazegraph can be found here: <a href="https://wikitech.wikimedia.org/wiki/Nova_Resource:Wikidata-query/Documentation">https://wikitech.wikimedia.org/wiki/Nova_Resource:Wikidata-query/Documentation</a> (the author of this post doesn&rsquo;t take responsabilities for your failed attempts or disasters &ndash; if you success, I will like to hear and lear how you have manage it 😄 )</p>
-
+<p><img src="scale-out-bg.svg" alt="Blazegraph scale-out configuration">
 
 
 
@@ -796,7 +794,8 @@
 
 
 </figure>
-
+</p>
+<p>Yet, due to the lack of documentation and support for clustered and HA Blazegraph deployment, the scale-out option is only for those fearless adventurers who wants to try out a clustered and HA version of Blazegraph. A guide about how to deploy the clustered configuration can be found here <a href="https://github.com/blazegraph/database/wiki/ClusterGuide">https://github.com/blazegraph/database/wiki/ClusterGuide</a> with the following advice: <code>We recommend that you ask for help when attempting your first cluster install!</code>; the HA configuration is explained here: <a href="https://github.com/blazegraph/database/wiki/HAJournalServer#Basic_Deployment;">https://github.com/blazegraph/database/wiki/HAJournalServer#Basic_Deployment;</a> and a example with Wikidata deployment of Blazegraph can be found here: <a href="https://wikitech.wikimedia.org/wiki/Nova_Resource:Wikidata-query/Documentation">https://wikitech.wikimedia.org/wiki/Nova_Resource:Wikidata-query/Documentation</a> (the author of this post doesn&rsquo;t take responsabilities for your failed attempts or disasters &ndash; if you success, I will like to hear and lear how you have manage it 😄 )</p>
 <p>Still, the stand-alone version Blazegraph is a really interesting option for working with open source triple-store which can manage big data volumes.</p>
 
     </div>
