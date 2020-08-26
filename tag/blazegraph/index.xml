@@ -17,8 +17,8 @@
       <link>https://ga11u.github.io/post/blazegraph-scale-out/</link>
       <pubDate>Wed, 26 Aug 2020 10:26:28 +0200</pubDate>
       <guid>https://ga11u.github.io/post/blazegraph-scale-out/</guid>
-      <description>&lt;p&gt;Blazegraph is a high performance scale-out triple-store for big data which can support up to ~12.7B triples in a single machine (see previous 
-&lt;a href=&#34;https://ga11u.github.io/post/triplestores-scale-out/&#34;&gt;post&lt;/a&gt; ). Even though it is presented as an ultra high-performance graph database and designed to scale-out, the scale-out feature has not been that much supported as developers would wish.&lt;/p&gt;
+      <description>&lt;p&gt;Blazegraph&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt; is a high performance scale-out triple-store for big data which can support up to ~12.7B triples in a single machine (see previous 
+&lt;a href=&#34;https://ga11u.github.io/post/triplestores-scale-out/&#34;&gt;post&lt;/a&gt;). Even though it is presented as an ultra high-performance graph database and designed to scale-out, the scale-out feature has not been that much supported as developers would wish.&lt;/p&gt;
 &lt;p&gt;At the beginning (from the 2.0.0 release), the scale-out was moved to a Enterprise fueture under licence supriptions, as we can see from  the following information about High Availability (HA) and Scale-out features in the Blazegraph Blog (&lt;a href=&#34;https://blog.blazegraph.com/):&#34;&gt;https://blog.blazegraph.com/):&lt;/a&gt;&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;Enterprise Features (HA and Scale-out)&lt;/strong&gt;&lt;/p&gt;
@@ -30,7 +30,7 @@
 &lt;p&gt;You can always do the poor man&amp;rsquo;s HA, put the updates onto a durable queue, and then apply writes to each server in parallel.  You would need to handle master failover of course.  Or you can capture the IChangeLog from one server and replicate the post-facto changes (in terms of statements added and removed) to the other servers, again using a durable queue to capture the post-commit change set.  To do the latter, you would also need to report additions to the dictionary indices (which is not currently done, but which would not be that difficult to add in the LexiconRelation and an apply loop interface for the replicas to apply the deltas on their local indices).  I think this might &amp;ldquo;just work&amp;rdquo;.  The local journal tracks the transactions in flight and manages the recycling of deleted records once no transaction can read on those records.  So transactional access to data should &amp;ldquo;work&amp;rdquo; on the replicas without doing anything else. Again, you would need to handle master failover, etc.&lt;/p&gt;
 &lt;p&gt;Thanks, Bryan&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;Currently, since Blazegraph was taken over by Amazon (Neptune AWS), the project does not seem to be activly maintained. However, it is possible to scale-out Blazegraph and configure with HA clusters.&lt;/p&gt;
+&lt;p&gt;Currently, since Blazegraph was taken over by Amazon (Neptune AWS&lt;sup id=&#34;fnref:2&#34;&gt;&lt;a href=&#34;#fn:2&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;), the project does not seem to be activly maintained. However, it is possible to scale-out Blazegraph and configure with HA clusters.&lt;/p&gt;
 &lt;p&gt;The Blazegraph scale-out architecture (Figure 1) is based 
 on a shared disk volume where all Blazegraph&amp;rsquo;s nodes have access to the data. This shared disck volume can be set-up accross different machines, racks or regions with servies like Gluster. A load balancer distributes the data requests and updates between the Blazegraph&amp;rsquo;s nodes and Zookeeper manages the services running on each node.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;scale-out-bg.svg&#34; alt=&#34;Blazegraph scale-out architecture&#34;&gt;
@@ -68,13 +68,27 @@ on a shared disk volume where all Blazegraph&amp;rsquo;s nodes have access to th
 
 &lt;/figure&gt;
 &lt;/p&gt;
-&lt;p&gt;The Blazegraph scale-out architecture provides with horisontal scaling as both nodes an disks space can be extended. However, this architecture does not provide of distributed data along each node, as it would be the case of Apache Cassandra.&lt;/p&gt;
-&lt;p&gt;Due to the lack of documentation and support for clustered and HA Blazegraph deployment, the scale-out option is only for those fearless adventurers who wants to try out the clustered and HA version of Blazegraph. A guide about how to deploy the clustered configuration can be found at &lt;a href=&#34;https://github.com/blazegraph/database/wiki/ClusterGuide&#34;&gt;https://github.com/blazegraph/database/wiki/ClusterGuide&lt;/a&gt; with the following advice: &lt;code&gt;We recommend that you ask for help when attempting your first cluster install!&lt;/code&gt;, the HA configuration is explained at &lt;a href=&#34;https://github.com/blazegraph/database/wiki/HAJournalServer#Basic_Deployment,&#34;&gt;https://github.com/blazegraph/database/wiki/HAJournalServer#Basic_Deployment,&lt;/a&gt; and a example with the Wikidata deployment of Blazegraph can be found at &lt;a href=&#34;https://wikitech.wikimedia.org/wiki/Nova_Resource:Wikidata-query/Documentation&#34;&gt;https://wikitech.wikimedia.org/wiki/Nova_Resource:Wikidata-query/Documentation&lt;/a&gt; (the author of this post doesn&amp;rsquo;t take responsabilities for your failed attempts or disasters &amp;ndash; if you success, I will like to hear and lear how you have manage it 😄).&lt;/p&gt;
+&lt;p&gt;The Blazegraph scale-out architecture provides with horisontal scaling as both nodes an disks space can be extended. However, this architecture does not provide of distributed data along each node, as it would be the case of Apache Cassandra&lt;sup id=&#34;fnref:3&#34;&gt;&lt;a href=&#34;#fn:3&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;3&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
+&lt;p&gt;Due to the lack of documentation and support for clustered and HA Blazegraph deployment, the scale-out option is only for those fearless adventurers who wants to try out the clustered and HA version of Blazegraph. A guide about how to deploy the clustered configuration can be found at &lt;a href=&#34;https://github.com/blazegraph/database/wiki/ClusterGuide&#34;&gt;https://github.com/blazegraph/database/wiki/ClusterGuide&lt;/a&gt; with the following advice: &lt;code&gt;We recommend that you ask for help when attempting your first cluster install!&lt;/code&gt;, the HA configuration is explained at &lt;a href=&#34;https://github.com/blazegraph/database/wiki/HAJournalServer#Basic_Deployment,&#34;&gt;https://github.com/blazegraph/database/wiki/HAJournalServer#Basic_Deployment,&lt;/a&gt; and a example with the Wikidata deployment of Blazegraph (with 3 nodes) can be found at &lt;a href=&#34;https://wikitech.wikimedia.org/wiki/Nova_Resource:Wikidata-query/Documentation&#34;&gt;https://wikitech.wikimedia.org/wiki/Nova_Resource:Wikidata-query/Documentation&lt;/a&gt; (the author of this post doesn&amp;rsquo;t take responsabilities for your failed attempts or disasters &amp;ndash; if you success, I will like to hear and lear how you have manage it 😄).&lt;/p&gt;
 &lt;div class=&#34;alert alert-note&#34;&gt;
   &lt;div&gt;
     Still, the stand-alone version Blazegraph is a really interesting option for working with an open source triple-store which can manage big data volumes while providing high performance and support for RDF, SPARQL 1.1 and Gremlin.
   &lt;/div&gt;
 &lt;/div&gt;
+&lt;section class=&#34;footnotes&#34; role=&#34;doc-endnotes&#34;&gt;
+&lt;hr&gt;
+&lt;ol&gt;
+&lt;li id=&#34;fn:1&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;&lt;a href=&#34;https://blazegraph.com&#34;&gt;https://blazegraph.com&lt;/a&gt; &lt;a href=&#34;#fnref:1&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:2&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;&lt;a href=&#34;https://aws.amazon.com/neptune&#34;&gt;https://aws.amazon.com/neptune&lt;/a&gt; &lt;a href=&#34;#fnref:2&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:3&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;&lt;a href=&#34;https://cassandra.apache.org&#34;&gt;https://cassandra.apache.org&lt;/a&gt; &lt;a href=&#34;#fnref:3&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/section&gt;
 </description>
     </item>
     
