@@ -30,6 +30,7 @@
 &lt;/blockquote&gt;
 &lt;p&gt;Currently, since Blazegraph was taken over by Amazon (Neptune AWS), the project does not seem to be activly maintained. However, it is possible to scale-out Blazegraph and configure with HA clusters.&lt;/p&gt;
 &lt;p&gt;To set up a Clustered or HA version of Blazegraph the first requirment is to set up a shared disk volume which will be accessed by all nodes. Thus, contrary to other well-known big data soulutions like Apache Cassandra, all nodes are accessing to the same data instances and not to their own copies/versions. Zookeeper manages the services running on each node and the access to the knowledge graph is rotated along the nodes.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;scale-out-bg.svg&#34; alt=&#34;Blazegraph scale-out configuration&#34;&gt;&lt;/p&gt;
 
 
 
@@ -49,10 +50,10 @@
 &lt;figure id=&#34;figure-blazegraph-scale-out-configuration&#34;&gt;
 
 
-  &lt;a data-fancybox=&#34;&#34; href=&#34;scale-out-gb.svg&#34; data-caption=&#34;Blazegraph scale-out configuration&#34;&gt;
+  &lt;a data-fancybox=&#34;&#34; href=&#34;&#34; data-caption=&#34;Blazegraph scale-out configuration&#34;&gt;
 
 
-  &lt;img src=&#34;scale-out-gb.svg&#34; alt=&#34;&#34;  &gt;
+  &lt;img src=&#34;&#34; alt=&#34;&#34;  &gt;
 &lt;/a&gt;
 
 
