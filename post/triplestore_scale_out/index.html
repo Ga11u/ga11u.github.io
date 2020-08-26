@@ -802,7 +802,14 @@
 </p>
 <p><strong>So what? What can we do if we need to scale-out triple-stores and we want to use and support open-source projects?</strong></p>
 <p>If we don&rsquo;t want to work with a propertary or licensing tripe-stores but still needing a scale-out configuration, then we have two options: (1) using some open source triple-store on top of a highly scalable database like Apache HBase<sup id="fnref:9"><a href="#fn:9" class="footnote-ref" role="doc-noteref">9</a></sup> or (2) we can use a graph database in combination with Gremlin. Both options have their pros and cons. Using a triple-store in combination with a highly scalable DB provides with the benefits of both platforms but the system maintenance and complexity is considerably increased. Whereas, while most of the graph databases do not support RDF, SPARQL, do not have reasoning or infering services and SPARQL quieres have to be translated to other query languages like Gremlin<sup id="fnref:10"><a href="#fn:10" class="footnote-ref" role="doc-noteref">10</a></sup> (although not all SPARQL queries can be transformed to Gremlin and Gremlin only supports SPARQL 1.0 and not 1.1), there is only one system to configure and maintain.</p>
-<p>Examples of such soultions are: the Jena+HBase triple-store which combines Apache Jena with Apache HBase to provide a scalable triple-store using RDF and SPARQL, Titan<sup id="fnref:11"><a href="#fn:11" class="footnote-ref" role="doc-noteref">11</a></sup> and JanusGraph<sup id="fnref:12"><a href="#fn:12" class="footnote-ref" role="doc-noteref">12</a></sup> graph databases that run on top of Apache HBase and Cassandra<sup id="fnref:13"><a href="#fn:13" class="footnote-ref" role="doc-noteref">13</a></sup> and suport Gremlin, or Neo4j<sup id="fnref:14"><a href="#fn:14" class="footnote-ref" role="doc-noteref">14</a></sup> and ArangoDB<sup id="fnref:15"><a href="#fn:15" class="footnote-ref" role="doc-noteref">15</a></sup> graph databases that also suport Gremlin.</p>
+<p>Examples of such soultions are: the Jena+HBase triple-store which combines Apache Jena with Apache HBase to provide a scalable triple-store using RDF and SPARQL, Titan<sup id="fnref:11"><a href="#fn:11" class="footnote-ref" role="doc-noteref">11</a></sup> and JanusGraph<sup id="fnref:12"><a href="#fn:12" class="footnote-ref" role="doc-noteref">12</a></sup> graph databases that run on top of Apache HBase and Cassandra<sup id="fnref:13"><a href="#fn:13" class="footnote-ref" role="doc-noteref">13</a></sup> and suport Gremlin, or Neo4j<sup id="fnref:14"><a href="#fn:14" class="footnote-ref" role="doc-noteref">14</a></sup> and ArangoDB<sup id="fnref:15"><a href="#fn:15" class="footnote-ref" role="doc-noteref">15</a></sup> graph databases that also suport Gremlin. 
+
+
+
+
+
+
+</p>
 
 
 
