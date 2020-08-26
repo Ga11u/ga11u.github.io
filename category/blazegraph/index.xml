@@ -14,11 +14,11 @@
     
     <item>
       <title>Scaling-out Blazegraph, is it possible?</title>
-      <link>https://ga11u.github.io/post/blazegraph-scale/</link>
+      <link>https://ga11u.github.io/post/blazegraph-scale-out/</link>
       <pubDate>Wed, 26 Aug 2020 10:26:28 +0200</pubDate>
-      <guid>https://ga11u.github.io/post/blazegraph-scale/</guid>
+      <guid>https://ga11u.github.io/post/blazegraph-scale-out/</guid>
       <description>&lt;p&gt;Blazegraph is a high performance scale-out triple-store for big data which can support up to ~12.7B triples in a single machine (see previous 
-&lt;a href=&#34;https://ga11u.github.io/post/triplestore_scale_out/&#34;&gt;post&lt;/a&gt;. Even though it is presented as an ultra high-performance graph database and designed to scale-out, the scale-out feature has not been that much supported as developers would wish.&lt;/p&gt;
+&lt;a href=&#34;https://ga11u.github.io/post/triplestores-scale-out/&#34;&gt;post&lt;/a&gt;). Even though it is presented as an ultra high-performance graph database and designed to scale-out, the scale-out feature has not been that much supported as developers would wish.&lt;/p&gt;
 &lt;p&gt;At the beginning (from the 2.0.0 release), the scale-out was moved to a Enterprise fueture under licence supriptions, as we can see from  the following information about High Availability (HA) and Scale-out features in the Blazegraph Blog (&lt;a href=&#34;https://blog.blazegraph.com/):&#34;&gt;https://blog.blazegraph.com/):&lt;/a&gt;&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;Enterprise Features (HA and Scale-out)&lt;/strong&gt;&lt;/p&gt;

@@ -30,10 +30,10 @@
   
     
   
-  <meta name="description" content="PhD Candidate">
+  <meta name="description" content="Blazegraph is a high performance scale-out triple-store for big data which can support up to ~12.7B triples in a single machine (see previous post). Even though it is presented as an ultra high-performance graph database and designed to scale-out, the scale-out feature has not been that much supported as developers would wish.">
 
   
-  <link rel="alternate" hreflang="en-us" href="https://ga11u.github.io/category/semantic-technologies/">
+  <link rel="alternate" hreflang="en-us" href="https://ga11u.github.io/post/blazegraph-scale-out/">
 
   
 
@@ -226,14 +226,12 @@
   
 
   
-  <link rel="alternate" href="/category/semantic-technologies/index.xml" type="application/rss+xml" title="Marc Page">
-  
 
   <link rel="manifest" href="/index.webmanifest">
   <link rel="icon" type="image/png" href="/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_32x32_fill_lanczos_center_2.png">
   <link rel="apple-touch-icon" type="image/png" href="/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_192x192_fill_lanczos_center_2.png">
 
-  <link rel="canonical" href="https://ga11u.github.io/category/semantic-technologies/">
+  <link rel="canonical" href="https://ga11u.github.io/post/blazegraph-scale-out/">
 
   
   
@@ -249,17 +247,65 @@
   <meta property="twitter:card" content="summary">
   
   <meta property="og:site_name" content="Marc Page">
-  <meta property="og:url" content="https://ga11u.github.io/category/semantic-technologies/">
-  <meta property="og:title" content="Semantic technologies | Marc Page">
-  <meta property="og:description" content="PhD Candidate"><meta property="og:image" content="https://ga11u.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png">
+  <meta property="og:url" content="https://ga11u.github.io/post/blazegraph-scale-out/">
+  <meta property="og:title" content="Scaling-out Blazegraph, is it possible? | Marc Page">
+  <meta property="og:description" content="Blazegraph is a high performance scale-out triple-store for big data which can support up to ~12.7B triples in a single machine (see previous post). Even though it is presented as an ultra high-performance graph database and designed to scale-out, the scale-out feature has not been that much supported as developers would wish."><meta property="og:image" content="https://ga11u.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png">
   <meta property="twitter:image" content="https://ga11u.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png"><meta property="og:locale" content="en-us">
   
-    <meta property="og:updated_time" content="2020-08-26T10:26:28&#43;02:00">
+    
+      <meta property="article:published_time" content="2020-08-26T10:26:28&#43;02:00">
+    
+    <meta property="article:modified_time" content="2020-08-26T10:26:28&#43;02:00">
   
 
   
 
 
+    
+
+
+
+
+
+
+  
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://ga11u.github.io/post/blazegraph-scale-out/"
+  },
+  "headline": "Scaling-out Blazegraph, is it possible?",
+  
+  "datePublished": "2020-08-26T10:26:28+02:00",
+  "dateModified": "2020-08-26T10:26:28+02:00",
+  
+  "author": {
+    "@type": "Person",
+    "name": "Marc Gallofré"
+  },
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "Marc Page",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://ga11u.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_192x192_fill_lanczos_center_2.png"
+    }
+  },
+  "description": "Blazegraph is a high performance scale-out triple-store for big data which can support up to ~12.7B triples in a single machine (see previous post). Even though it is presented as an ultra high-performance graph database and designed to scale-out, the scale-out feature has not been that much supported as developers would wish."
+}
+</script>
+
+  
+
+  
 
 
   
@@ -301,7 +347,7 @@
 
 
 
-  <title>Semantic technologies | Marc Page</title>
+  <title>Scaling-out Blazegraph, is it possible? | Marc Page</title>
 
 </head>
 <body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" >
@@ -563,6 +609,109 @@
 </nav>
 
 
+  <article class="article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+  
+  
+<div class="article-container pt-3">
+  <h1>Scaling-out Blazegraph, is it possible?</h1>
+
+  
+  <p class="page-subtitle">Yes, but it is not an easy task</p>
+  
+
+  
+    
+
+
+<div class="article-metadata">
+
+  
+  
+  
+  
+  <div>
+    
+
+  
+  <span >Marc Gallofré</span>
+  </div>
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    Aug 26, 2020
+  </span>
+  
+
+  
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    4 min read
+  </span>
+  
+
+  
+  
+  
+
+  
+  
+  <span class="middot-divider"></span>
+  <span class="article-categories">
+    <i class="fas fa-folder mr-1"></i><a href="/category/news-angler/">News Angler</a>, <a href="/category/blazegraph/">Blazegraph</a>, <a href="/category/software-architecture/">Software Architecture</a>, <a href="/category/semantic-technologies/">Semantic technologies</a></span>
+  
+
+</div>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="btn-links mb-3">
+  
+  
+
+
+
+
+
+
+
+
   
 
 
@@ -573,59 +722,249 @@
 
 
 
-
-
-
-  
-
-  
-  
   
     
   
-<div class="universal-wrapper pt-3">
-  <h1>Semantic technologies</h1>
 
-  
+
+
+
+
+
+
+
+
+
+
+</div>
+
 
   
 </div>
 
 
 
-<div class="universal-wrapper">
-  
+  <div class="article-container">
+
+    <div class="article-style">
+      <p>Blazegraph is a high performance scale-out triple-store for big data which can support up to ~12.7B triples in a single machine (see previous 
+<a href="/post/triplestores-scale-out/">post</a>). Even though it is presented as an ultra high-performance graph database and designed to scale-out, the scale-out feature has not been that much supported as developers would wish.</p>
+<p>At the beginning (from the 2.0.0 release), the scale-out was moved to a Enterprise fueture under licence supriptions, as we can see from  the following information about High Availability (HA) and Scale-out features in the Blazegraph Blog (<a href="https://blog.blazegraph.com/):">https://blog.blazegraph.com/):</a></p>
+<blockquote>
+<p><strong>Enterprise Features (HA and Scale-out)</strong></p>
+<p>Starting in release 2.0.0, the Scale-out and HA capabilities are moved to Enterprise features. These are available to uses with support and/or license subscription. If you are an existing GPLv2 user of these features, we have some easy ways to migrate. Contact us for more information. We’d like to make it as easy as possible.</p>
+</blockquote>
+<p>Later, the support for High Availability was droped out from the project, due to the lack of open source community, as it is corroborated by Bryan Thompson (@thompsonbry), the Chief Scientist and founder of SYSTAP and one of the contributors of Blazegraph, in the issue #116 at Blazegraph/database GitHub (<a href="https://github.com/blazegraph/database/issues/116):">https://github.com/blazegraph/database/issues/116):</a></p>
+<blockquote>
+<p>The HA configuration is not functional in more recent releases. Systap halted development of the Blazegraph HA feature several years ago (long before we came to Amazon).  Full HA is a complex thing to develop and maintain with master failure, testing of the various failover configurations, longevity testing, targeted failure mode tests, etc.  We self-funded quite a bit, but we did not get the engagement from the open source community to make it worth while to continue HA as an open source feature.</p>
+<p>You can always do the poor man&rsquo;s HA, put the updates onto a durable queue, and then apply writes to each server in parallel.  You would need to handle master failover of course.  Or you can capture the IChangeLog from one server and replicate the post-facto changes (in terms of statements added and removed) to the other servers, again using a durable queue to capture the post-commit change set.  To do the latter, you would also need to report additions to the dictionary indices (which is not currently done, but which would not be that difficult to add in the LexiconRelation and an apply loop interface for the replicas to apply the deltas on their local indices).  I think this might &ldquo;just work&rdquo;.  The local journal tracks the transactions in flight and manages the recycling of deleted records once no transaction can read on those records.  So transactional access to data should &ldquo;work&rdquo; on the replicas without doing anything else. Again, you would need to handle master failover, etc.</p>
+<p>Thanks, Bryan</p>
+</blockquote>
+<p>Currently, since Blazegraph was taken over by Amazon (Neptune AWS), the project does not seem to be activly maintained. However, it is possible to scale-out Blazegraph and configure with HA clusters.</p>
+<p>To set up a Clustered or HA version of Blazegraph the first requirment is to set up a shared disk volume which will be accessed by all nodes. Thus, contrary to other well-known big data soulutions like Apache Cassandra, all nodes are accessing to the same data instances and not to their own copies/versions. Zookeeper manages the services running on each node and the access to the knowledge graph is rotated along the nodes.</p>
+<p><img src="scale-out-bg.svg" alt="Blazegraph scale-out configuration">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure id="figure-blazegraph-scale-out-configuration">
+
+
+  <a data-fancybox="" href="" data-caption="Blazegraph scale-out configuration">
+
+
+  <img src="" alt=""  >
+</a>
+
 
   
   
-    
-    
-    
-    <div>
-      <h2><a href="/post/blazegraph-scale-out/" >Scaling-out Blazegraph, is it possible?</a></h2>
-      <div class="article-style">
-        
-          Blazegraph is a high performance scale-out triple-store for big data which can support up to ~12.7B triples in a single machine (see previous post). Even though it is presented as an ultra high-performance graph database and designed to scale-out, the scale-out feature has not been that much supported as developers would wish.
-        
-      </div>
-    </div>
-  
-    
-    
-    
-    <div>
-      <h2><a href="/post/triplestores-scale-out/" >Is It Possible to Sale-out Open Source Triple-Stores?</a></h2>
-      <div class="article-style">
-        
-          Semantic technologies are really interesting from a Big Data prespective. Yet, these technologies together with semantic web resources enhance Knowledge Graphs by providing reacher means for representing and defining facts, concepts, properties, relations and logic-rules, while facilitating knowledge graph understanding, integration and manipulation by using ontologies, standard vocabularies and linking its concepts to Linked Open Data (LOD) resources such as Wikidata, Schema.
-        
-      </div>
-    </div>
-  
+  <figcaption>
+    Blazegraph scale-out configuration
+  </figcaption>
 
-  
 
+</figure>
+</p>
+<p>Yet, due to the lack of documentation and support for clustered and HA Blazegraph deployment, the scale-out option is only for those fearless adventurers who wants to try out a clustered and HA version of Blazegraph. A guide about how to deploy the clustered configuration can be found here <a href="https://github.com/blazegraph/database/wiki/ClusterGuide">https://github.com/blazegraph/database/wiki/ClusterGuide</a> with the following advice: <code>We recommend that you ask for help when attempting your first cluster install!</code>; the HA configuration is explained here: <a href="https://github.com/blazegraph/database/wiki/HAJournalServer#Basic_Deployment;">https://github.com/blazegraph/database/wiki/HAJournalServer#Basic_Deployment;</a> and a example with Wikidata deployment of Blazegraph can be found here: <a href="https://wikitech.wikimedia.org/wiki/Nova_Resource:Wikidata-query/Documentation">https://wikitech.wikimedia.org/wiki/Nova_Resource:Wikidata-query/Documentation</a></p>
+<div class="alert alert-note">
+  <div>
+    The author of this post doesn&rsquo;t take responsabilities for your failed attempts or disasters &ndash; if you success, I will like to hear and lear how you have manage it 😄
+  </div>
 </div>
+<p>Still, the stand-alone version Blazegraph is a really interesting option for working with open source triple-store which can manage big data volumes.</p>
+
+    </div>
+
+    
+
+
+
+
+
+
+<div class="article-tags">
+  
+  <a class="badge badge-light" href="/tag/news-angler/">News Angler</a>
+  
+  <a class="badge badge-light" href="/tag/blazegraph/">Blazegraph</a>
+  
+  <a class="badge badge-light" href="/tag/software-architecture/">Software Architecture</a>
+  
+  <a class="badge badge-light" href="/tag/semantic-technologies/">Semantic technologies</a>
+  
+</div>
+
+
+
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://twitter.com/intent/tweet?url=https://ga11u.github.io/post/blazegraph-scale-out/&amp;text=Scaling-out%20Blazegraph,%20is%20it%20possible?" target="_blank" rel="noopener" class="share-btn-twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.facebook.com/sharer.php?u=https://ga11u.github.io/post/blazegraph-scale-out/&amp;t=Scaling-out%20Blazegraph,%20is%20it%20possible?" target="_blank" rel="noopener" class="share-btn-facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="mailto:?subject=Scaling-out%20Blazegraph,%20is%20it%20possible?&amp;body=https://ga11u.github.io/post/blazegraph-scale-out/" target="_blank" rel="noopener" class="share-btn-email">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=https://ga11u.github.io/post/blazegraph-scale-out/&amp;title=Scaling-out%20Blazegraph,%20is%20it%20possible?" target="_blank" rel="noopener" class="share-btn-linkedin">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="whatsapp://send?text=Scaling-out%20Blazegraph,%20is%20it%20possible?%20https://ga11u.github.io/post/blazegraph-scale-out/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://service.weibo.com/share/share.php?url=https://ga11u.github.io/post/blazegraph-scale-out/&amp;title=Scaling-out%20Blazegraph,%20is%20it%20possible?" target="_blank" rel="noopener" class="share-btn-weibo">
+          <i class="fab fa-weibo"></i>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <div class="article-widget content-widget-hr">
+    <h3>Related</h3>
+    <ul>
+      
+      <li><a href="/post/triplestores-scale-out/">Is It Possible to Sale-out Open Source Triple-Stores?</a></li>
+      
+    </ul>
+  </div>
+  
+
+
+
+
+
+  </div>
+</article>
 
       
 
