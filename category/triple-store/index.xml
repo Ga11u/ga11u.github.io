@@ -38,31 +38,8 @@
 
 
   
-    &lt;div class=&#34;pub-list-item&#34; style=&#34;margin-bottom: 1rem&#34;&gt;
-  &lt;i class=&#34;far fa-file-alt pub-icon&#34; aria-hidden=&#34;true&#34;&gt;&lt;/i&gt;
-
-  
-  
-
-  &lt;span class=&#34;article-metadata li-cite-author&#34;&gt;
     
 
-  
-  &lt;span &gt;Marc Gallofré&lt;/span&gt;
-  &lt;/span&gt;
-  (2020).
-  &lt;a href=&#34;https://ga11u.github.io/post/blazegraph-scale/&#34;&gt;Scaling-out Blazegraph, is it possible?&lt;/a&gt;.
-  
-  &lt;p&gt;
-
-
-
-
-
-
-
-
-  
 
 
 
@@ -73,22 +50,18 @@
 
 
   
-    
-  
 
 
-
-
-
-
-
-
-
-
-&lt;/p&gt;
+&lt;div class=&#34;view-list-item&#34;&gt;
+  &lt;i class=&#34;far fa-newspaper pub-icon&#34; aria-hidden=&#34;true&#34;&gt;&lt;/i&gt;
+  &lt;a href=&#34;https://ga11u.github.io/post/blazegraph-scale/&#34; &gt;Scaling-out Blazegraph, is it possible?&lt;/a&gt;
 
   
+
   
+
+  
+
 &lt;/div&gt;
 
   
