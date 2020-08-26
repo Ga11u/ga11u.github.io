@@ -670,7 +670,7 @@
   
   <span class="middot-divider"></span>
   <span class="article-reading-time">
-    3 min read
+    4 min read
   </span>
   
 
@@ -748,7 +748,7 @@
 
     <div class="article-style">
       <p>Semantic technologies are really interesting from a Big Data prespective. Yet, these technologies together with semantic web resources enhance Knowledge Graphs by providing reacher means for representing and defining facts, concepts, properties, relations and logic-rules, while facilitating knowledge graph understanding, integration and manipulation by using ontologies, standard vocabularies and linking its concepts to Linked Open Data (LOD) resources such as Wikidata, Schema.org or DBPedia. Nevertheless, Big Data cames with its known challanges like the need for systems that are able to scale-up and -out (vertical and horisontal scaling). Thus, semantic technologies and more precicely triple-stores which support RDF and SPARQL following the W3C and semantic web standards (i.e., the databases designed for storing knowledge graphs represented with triples in RDF and query them with SPARQL) must adapt and be redesigned to facilitate horisonal and vertical scaling.</p>
-<p>So far, the scale-up seems to be solved with the large triple-stores<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> that can handle big data volumes by adding more resources. E.g., propiertary triple-stores like the Spatial and Graph features in Oracle Database, the AnzoGraph DB and the AllegroGraph that can deal more than ~1T (10<sup>12</sup>) triples or open-source triple stores like the Virtuoso Open Source Edition (~58.58B = ~58.58x10<sup>9</sup>), the Blazegraph (~12.7B)  and the Jena TDB (~1.7B). As we can see, in terms of dealing with big data volumes, open-source solutions are behind of those propiertary or licensing alternatives. But, the question that arises is: <strong>Are those numbers big enough?</strong> According to Orgacle&rsquo;s white paper<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>, 1T triples can represent:</p>
+<p>So far, the scale-up seems to be solved with the large triple-stores<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> that can handle big data volumes by adding more resources. E.g., propiertary triple-stores like the Spatial and Graph features in Oracle Database<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>, the AnzoGraph DB<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup> and the AllegroGraph<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup> that can deal more than ~1T (10<sup>12</sup>) triples or open-source triple stores like the Virtuoso Open Source Edition<sup id="fnref:5"><a href="#fn:5" class="footnote-ref" role="doc-noteref">5</a></sup> (~58.58B = ~58.58x10<sup>9</sup>), the Blazegraph<sup id="fnref:6"><a href="#fn:6" class="footnote-ref" role="doc-noteref">6</a></sup> (~12.7B)  and the Jena TDB<sup id="fnref:7"><a href="#fn:7" class="footnote-ref" role="doc-noteref">7</a></sup> (~1.7B). As we can see, in terms of dealing with big data volumes, open-source solutions are behind of those propiertary or licensing alternatives. But, the question that arises is: <strong>Are those numbers big enough?</strong> According to Orgacle&rsquo;s white paper<sup id="fnref:8"><a href="#fn:8" class="footnote-ref" role="doc-noteref">8</a></sup>, 1T triples can represent:</p>
 <blockquote>
 <ul>
 <li>1000 tweets for every one of the 1B Twitter users.</li>
@@ -761,7 +761,7 @@
 </ul>
 </blockquote>
 <p>On the other hand, when talking about scale-out solutions for large triple-stores we find that scale-out solutions are offered by most of the propiertary platforms or only in licensing versions like Virtuoso Enterprise Edition, with the exception of Blazegraph which is the only open source platform that offers scale-out.</p>
-<p>To know more about Blazegraph scale-out possibilities, you can read:
+<p>To know more about Blazegraph scale-out possibilities, I recommend you to read the following post:
 
 
 
@@ -781,98 +781,28 @@
 
 
 
-
-
   
 
 
-<div class="media stream-item">
-  <div class="media-body">
-
-    <h3 class="article-title mb-0 mt-0">
-      <a href="/post/blazegraph-scale/" >Scaling-out Blazegraph, is it possible?</a>
-    </h3>
-
-    
-    <a href="/post/blazegraph-scale/" class="summary-link">
-      <div class="article-style">
-        Blagraph was presented as a high performance scale-out triple-store for big data in it initials and it can support up to ~12.7B triples in a single machine. At the beginning (from the 2.
-      </div>
-    </a>
-    
-
-    <div class="stream-meta article-metadata">
-
-      
-
-      
-        
-
-
-<div class="article-metadata">
-
-  
-  
-  
-  
-  <div>
-    
-
-  
-  <span >Marc Gallofré</span>
-  </div>
-  
-  
-
-  
-  <span class="article-date">
-    
-    
-      
-    
-    Aug 26, 2020
-  </span>
-  
+<div class="view-list-item">
+  <i class="far fa-newspaper pub-icon" aria-hidden="true"></i>
+  <a href="/post/blazegraph-scale/" >Scaling-out Blazegraph, is it possible?</a>
 
   
 
   
-  <span class="middot-divider"></span>
-  <span class="article-reading-time">
-    4 min read
-  </span>
-  
 
-  
-  
-  
-
-  
-  
-  <span class="middot-divider"></span>
-  <span class="article-categories">
-    <i class="fas fa-folder mr-1"></i><a href="/category/news-angler/">News Angler</a>, <a href="/category/blazegraph/">Blazegraph</a>, <a href="/category/software-architecture/">Software Architecture</a>, <a href="/category/semantic-technologies/">Semantic technologies</a></span>
   
 
 </div>
 
-      
-    </div>
-
-    
-
-  </div>
-  <div class="ml-3">
-    
-    
-  </div>
-</div>
-
   
 
-</p>
-<p><strong>So what? What can we do if we need to scale-out triple-stores and we want to use and support open-source projects?</strong></p>
-<p>Some projects Jena TDB + HBase or Graph DBs with RDF/SPARQL/Gremlin</p>
+
+
+<strong>So what? What can we do if we need to scale-out triple-stores and we want to use and support open-source projects?</strong></p>
+<p>If we don&rsquo;t want to work with a propertary or licensing tripe-stores but still needing a scale-out configuration, then we have two options: (1) using some open source triple-store on top of a highly scalable database like Apache HBase<sup id="fnref:9"><a href="#fn:9" class="footnote-ref" role="doc-noteref">9</a></sup> or (2) we can use a graph database in combination with Gremlin. Both options have their pros and cons. Using a triple-store in combination with a highly scalable DB provides with the benefits of both platforms but the system maintenance and complexity is considerably increased. Whereas, while most of the graph databases do not support RDF, SPARQL, do not have reasoning or infering services and SPARQL quieres have to be translated to other query languages like Gremlin<sup id="fnref:10"><a href="#fn:10" class="footnote-ref" role="doc-noteref">10</a></sup> (although not all SPARQL queries can be transformed to Gremlin and Gremlin only supports SPARQL 1.0 and not 1.1), there is only one system to configure and maintain.</p>
+<p>Examples of such soultions are: the Jena+HBase triple-store which combines Apache Jena with Apache HBase to provide a scalable triple-store using RDF and SPARQL, Titan<sup id="fnref:11"><a href="#fn:11" class="footnote-ref" role="doc-noteref">11</a></sup> and JanusGraph<sup id="fnref:12"><a href="#fn:12" class="footnote-ref" role="doc-noteref">12</a></sup> graph databases that run on top of Apache HBase and Cassandra<sup id="fnref:13"><a href="#fn:13" class="footnote-ref" role="doc-noteref">13</a></sup> and suport Gremlin, or Neo4j<sup id="fnref:14"><a href="#fn:14" class="footnote-ref" role="doc-noteref">14</a></sup> and ArangoDB<sup id="fnref:15"><a href="#fn:15" class="footnote-ref" role="doc-noteref">15</a></sup> graph databases that also suport Gremlin.</p>
 <section class="footnotes" role="doc-endnotes">
 <hr>
 <ol>
@@ -880,7 +810,46 @@
 <p><a href="https://www.w3.org/wiki/LargeTripleStores">https://www.w3.org/wiki/LargeTripleStores</a> <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 <li id="fn:2" role="doc-endnote">
-<p><a href="https://download.oracle.com/otndocs/tech/semantic_web/pdf/OracleSpatialGraph_RDFgraph_1_trillion_Benchmark.pdf">https://download.oracle.com/otndocs/tech/semantic_web/pdf/OracleSpatialGraph_RDFgraph_1_trillion_Benchmark.pdf</a> <a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+<p><a href="https://www.oracle.com/database/technologies/spatialandgraph.html">https://www.oracle.com/database/technologies/spatialandgraph.html</a> <a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3" role="doc-endnote">
+<p><a href="https://www.cambridgesemantics.com/anzograph">https://www.cambridgesemantics.com/anzograph</a> <a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:4" role="doc-endnote">
+<p><a href="https://allegrograph.com">https://allegrograph.com</a> <a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:5" role="doc-endnote">
+<p><a href="https://virtuoso.openlinksw.com">https://virtuoso.openlinksw.com</a> <a href="#fnref:5" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:6" role="doc-endnote">
+<p><a href="https://blazegraph.com">https://blazegraph.com</a> <a href="#fnref:6" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:7" role="doc-endnote">
+<p><a href="https://jena.apache.org">https://jena.apache.org</a> <a href="#fnref:7" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:8" role="doc-endnote">
+<p><a href="https://download.oracle.com/otndocs/tech/semantic_web/pdf/OracleSpatialGraph_RDFgraph_1_trillion_Benchmark.pdf">https://download.oracle.com/otndocs/tech/semantic_web/pdf/OracleSpatialGraph_RDFgraph_1_trillion_Benchmark.pdf</a> <a href="#fnref:8" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:9" role="doc-endnote">
+<p><a href="https://hbase.apache.org">https://hbase.apache.org</a> <a href="#fnref:9" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:10" role="doc-endnote">
+<p><a href="https://tinkerpop.apache.org">https://tinkerpop.apache.org</a> <a href="#fnref:10" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:11" role="doc-endnote">
+<p><a href="http://titan.thinkaurelius.com">http://titan.thinkaurelius.com</a> <a href="#fnref:11" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:12" role="doc-endnote">
+<p><a href="https://janusgraph.org">https://janusgraph.org</a> <a href="#fnref:12" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:13" role="doc-endnote">
+<p><a href="https://cassandra.apache.org">https://cassandra.apache.org</a> <a href="#fnref:13" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:14" role="doc-endnote">
+<p><a href="https://neo4j.com">https://neo4j.com</a> <a href="#fnref:14" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:15" role="doc-endnote">
+<p><a href="https://www.arangodb.com">https://www.arangodb.com</a> <a href="#fnref:15" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 </ol>
 </section>
