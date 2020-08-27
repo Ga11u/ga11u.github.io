@@ -1,16 +1,24 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Triple Store | Marc Page</title>
+    <title>triple-store | Marc Page</title>
     <link>https://ga11u.github.io/category/triple-store/</link>
       <atom:link href="https://ga11u.github.io/category/triple-store/index.xml" rel="self" type="application/rss+xml" />
-    <description>Triple Store</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Fri, 21 Aug 2020 10:52:25 +0200</lastBuildDate>
+    <description>triple-store</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Thu, 27 Aug 2020 16:51:52 +0200</lastBuildDate>
     <image>
       <url>https://ga11u.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png</url>
-      <title>Triple Store</title>
+      <title>triple-store</title>
       <link>https://ga11u.github.io/category/triple-store/</link>
     </image>
+    
+    <item>
+      <title>Expanding Blazegraph Data Volume</title>
+      <link>https://ga11u.github.io/post/expanding-blazegraph-data-volumes/</link>
+      <pubDate>Thu, 27 Aug 2020 16:51:52 +0200</pubDate>
+      <guid>https://ga11u.github.io/post/expanding-blazegraph-data-volumes/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Is It Possible to Sale-out Open Source Triple-Stores?</title>
