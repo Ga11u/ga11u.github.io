@@ -751,12 +751,12 @@
 <p>In this guide, I will show you how to do it, by using the example of GitLab repositories.</p>
 <p>Lets assume that we have our private images in GitLab and we have already deployed a swarm stack called <code>example-project</code>.</p>
 <p>The first thing you need to do is:</p>
-<pre><code class="language-cmd">docker login &lt;gitlab-url&gt;:&lt;repository-port&gt;
+<pre><code class="language-shell">docker login &lt;gitlab-url&gt;:&lt;repository-port&gt;
 </code></pre>
 <p>You will need to check the port with your GitLab or repository provider, a common used port in GitLab is 4567.</p>
 <p>Then you will be asked to provide your <code>username</code> and password. The <code>password</code> is often a token or a secure key you have created only for accessing to your private repository.</p>
 <p>Finnaly, you can deploy your stack as always by adding the option <code>--with-registry-auth</code>.</p>
-<pre><code class="language-cmd">docker stack deploy -c docker-compose.yml nh --with-registry-auth
+<pre><code class="language-shell">docker stack deploy -c docker-compose.yml example-project --with-registry-auth
 </code></pre>
 
     </div>
@@ -944,6 +944,10 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js" integrity="sha256-eOgo0OtLL4cdq7RdwRUiGKLX9XsIJ7nGhWEKbohmVAQ=" crossorigin="anonymous"></script>
         
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/languages/r.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/languages/shell.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/languages/yaml.min.js"></script>
         
       
 

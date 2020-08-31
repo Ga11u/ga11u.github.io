@@ -787,7 +787,9 @@
       - target: 7199
         published: 7199
 </code></pre>
-<p>(2) Run again the command <code>docker stack deploy -c docker-compose.yml example_project</code>.</p>
+<p>(2) Run again the command:</p>
+<pre><code class="language-bash">docker stack deploy -c docker-compose.yml example_project
+</code></pre>
 <p>In that way the Docker Swarm will create a new version of our service and stop old version after that.</p>
 <p>Finally, if everything has worked fine, we should be able to do something like this <code>nodetool tablestats -h &lt;CASSANDRA_NODE_IP&gt;</code>.</p>
 
@@ -968,6 +970,10 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js" integrity="sha256-eOgo0OtLL4cdq7RdwRUiGKLX9XsIJ7nGhWEKbohmVAQ=" crossorigin="anonymous"></script>
         
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/languages/r.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/languages/shell.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/languages/yaml.min.js"></script>
         
       
 
