@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Private Repository | Marc Page</title>
+    <link>https://ga11u.github.io/category/private-repository/</link>
+      <atom:link href="https://ga11u.github.io/category/private-repository/index.xml" rel="self" type="application/rss+xml" />
+    <description>Private Repository</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Mon, 31 Aug 2020 14:40:20 +0200</lastBuildDate>
+    <image>
+      <url>https://ga11u.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png</url>
+      <title>Private Repository</title>
+      <link>https://ga11u.github.io/category/private-repository/</link>
+    </image>
+    
+    <item>
+      <title>Deploying in Docker Swarm From Private a Repository</title>
+      <link>https://ga11u.github.io/post/swarm-deploying-from-private-repo/</link>
+      <pubDate>Mon, 31 Aug 2020 14:40:20 +0200</pubDate>
+      <guid>https://ga11u.github.io/post/swarm-deploying-from-private-repo/</guid>
+      <description>&lt;p&gt;By default Docker Swarm pull images from Docker Hub, but sometimes we want to have our own private repositories and private images. Then, a few things have to be changed to allow it.&lt;/p&gt;
+&lt;p&gt;In this guide, I will show you how to do it, by using the example of GitLab repositories.&lt;/p&gt;
+&lt;p&gt;Lets assume that we have our private images in GitLab and we have already deployed a swarm stack called &lt;code&gt;example-project&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;The first thing you need to do is:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-cmd&#34;&gt;docker login &amp;lt;gitlab-url&amp;gt;:&amp;lt;repository-port&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;You will need to check the port with your GitLab or repository provider, a common used port in GitLab is 4567.&lt;/p&gt;
+&lt;p&gt;Then you will be asked to provide your &lt;code&gt;username&lt;/code&gt; and password. The &lt;code&gt;password&lt;/code&gt; is often a token or a secure key you have created only for accessing to your private repository.&lt;/p&gt;
+&lt;p&gt;Finnaly, you can deploy your stack as always by adding the option &lt;code&gt;--with-registry-auth&lt;/code&gt;.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-cmd&#34;&gt;docker stack deploy -c docker-compose.yml nh --with-registry-auth
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

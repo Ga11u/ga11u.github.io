@@ -4,26 +4,86 @@
   
   <url>
     <loc>https://ga11u.github.io/authors/</loc>
-    <lastmod>2020-08-27T16:51:52+02:00</lastmod>
+    <lastmod>2020-08-31T14:40:20+02:00</lastmod>
   </url>
   
   <url>
     <loc>https://ga11u.github.io/categories/</loc>
-    <lastmod>2020-08-27T16:51:52+02:00</lastmod>
+    <lastmod>2020-08-31T14:40:20+02:00</lastmod>
   </url>
   
   <url>
-    <loc>https://ga11u.github.io/post/expanding-blazegraph-data-volumes/</loc>
-    <lastmod>2020-08-27T16:51:52+02:00</lastmod>
+    <loc>https://ga11u.github.io/post/swarm-deploying-from-private-repo/</loc>
+    <lastmod>2020-08-31T14:40:20+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ga11u.github.io/tag/docker/</loc>
+    <lastmod>2020-08-31T14:40:20+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ga11u.github.io/category/docker/</loc>
+    <lastmod>2020-08-31T14:40:20+02:00</lastmod>
   </url>
   
   <url>
     <loc>https://ga11u.github.io/author/marc-gallofre/</loc>
-    <lastmod>2020-08-27T16:51:52+02:00</lastmod>
+    <lastmod>2020-08-31T14:40:20+02:00</lastmod>
   </url>
   
   <url>
     <loc>https://ga11u.github.io/</loc>
+    <lastmod>2020-08-31T14:40:20+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ga11u.github.io/post/</loc>
+    <lastmod>2020-08-31T14:40:20+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ga11u.github.io/tag/private-repository/</loc>
+    <lastmod>2020-08-31T14:40:20+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ga11u.github.io/category/private-repository/</loc>
+    <lastmod>2020-08-31T14:40:20+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ga11u.github.io/tag/swarm/</loc>
+    <lastmod>2020-08-31T14:40:20+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ga11u.github.io/category/swarm/</loc>
+    <lastmod>2020-08-31T14:40:20+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ga11u.github.io/tags/</loc>
+    <lastmod>2020-08-31T14:40:20+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ga11u.github.io/tag/docker-compose/</loc>
+    <lastmod>2020-08-31T12:26:20+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ga11u.github.io/category/docker-compose/</loc>
+    <lastmod>2020-08-31T12:26:20+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ga11u.github.io/post/updating-doker-containers-without-downtime/</loc>
+    <lastmod>2020-08-31T12:26:20+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ga11u.github.io/post/expanding-blazegraph-data-volumes/</loc>
     <lastmod>2020-08-27T16:51:52+02:00</lastmod>
   </url>
   
@@ -34,16 +94,6 @@
   
   <url>
     <loc>https://ga11u.github.io/category/news-angler/</loc>
-    <lastmod>2020-08-27T16:51:52+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://ga11u.github.io/post/</loc>
-    <lastmod>2020-08-27T16:51:52+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://ga11u.github.io/tags/</loc>
     <lastmod>2020-08-27T16:51:52+02:00</lastmod>
   </url>
   
