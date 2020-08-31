@@ -24,8 +24,9 @@
 &lt;p&gt;Where the basic option are the -h (&amp;ndash;host) to pass as argument the hostname or IP address of a cassandra node and the -p (&amp;ndash;port) to pass as a argument the port number where nodetool will make the connection (by default 7199). By can also use the -pwf (&amp;ndash;password-file) to pass the password file path or the -pw (&amp;ndash;password) to pass the	password string.&lt;/p&gt;
 &lt;p&gt;Nodetool can be runned from either the same machine where Cassandra is installed and running or from an external machine using the apropiate options. In case we would like to use the nodetool in a running Cassandra docker service on a Swarm stack deployment it is enough to execture the nodetool command inside the running container:&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;docker exec -it &amp;lt;CONTAINER_ID&amp;gt; nodetool
+#To find the CONTAINER_ID, it is possible to use `docker ps` on the node where Cassandra container is running
 &lt;/code&gt;&lt;/pre&gt;
-&lt;h2 id=&#34;nodetool-status&#34;&gt;&lt;code&gt;nodetool status&lt;/code&gt;&lt;/h2&gt;
+&lt;h2 id=&#34;nodetool-status&#34;&gt;nodetool &lt;code&gt;status&lt;/code&gt;&lt;/h2&gt;
 &lt;p&gt;Nodetool status provides information about each node such as the status (up U or down D) and the state (normal N, leaving L, joining J, moving M), the node IP &lt;strong&gt;Address&lt;/strong&gt;, the amount of data used (&lt;strong&gt;Load&lt;/strong&gt;), the number of tokes, how much data is owned by the node (&lt;strong&gt;Owns&lt;/strong&gt;), the &lt;strong&gt;Host-ID&lt;/strong&gt; and the &lt;strong&gt;Rack&lt;/strong&gt;.&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;--  Address    Load       Tokens       Owns (effective)  Host ID                               Rack
 UN  10.0.1.28  70.68 MiB  256          67.5%             da80b540-0424-4ad1-b64c-51cf4c46dcfe  rack1
@@ -35,7 +36,7 @@ UN  10.0.1.14  67.69 MiB  256          63.0%             e04c747d-ae77-476f-92fc
 &lt;p&gt;The status accept the argument &lt;code&gt;keyspace&lt;/code&gt; where we can pass the name of a keyspace to get information related to this specific keyspace, in case we have set more than one.&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;nodetool &amp;lt;options&amp;gt; status &amp;lt;keyspace&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;
-&lt;h2 id=&#34;nodetool-tablestats&#34;&gt;&lt;code&gt;nodetool tablestats&lt;/code&gt;&lt;/h2&gt;
+&lt;h2 id=&#34;nodetool-tablestats&#34;&gt;nodetool &lt;code&gt;tablestats&lt;/code&gt;&lt;/h2&gt;
 &lt;p&gt;Nodetool tablestats provides information and statistics about keyspaces, index and tables. The information I found more interesting to check is the &lt;strong&gt;SSTable Compression Ratio&lt;/strong&gt; which represents the compression ratio (e.g., 0.25 means that 10MB of information are compressed to 2.5MB in Cassadra), the &lt;strong&gt;Read/Write count&lt;/strong&gt; and &lt;strong&gt;Local read/write count&lt;/strong&gt; which represent the total amount of read or write requests since the startup and the &lt;strong&gt;Read/Write latency&lt;/strong&gt; and &lt;strong&gt;Local read/write latency&lt;/strong&gt; the round trip time in milliseconds to comple the most recent read or write request.&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&#34;language-yaml&#34;&gt;Keyspace : example-case
         Read Count: 1349

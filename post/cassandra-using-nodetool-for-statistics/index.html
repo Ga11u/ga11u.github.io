@@ -752,8 +752,9 @@
 <p>Where the basic option are the -h (&ndash;host) to pass as argument the hostname or IP address of a cassandra node and the -p (&ndash;port) to pass as a argument the port number where nodetool will make the connection (by default 7199). By can also use the -pwf (&ndash;password-file) to pass the password file path or the -pw (&ndash;password) to pass the	password string.</p>
 <p>Nodetool can be runned from either the same machine where Cassandra is installed and running or from an external machine using the apropiate options. In case we would like to use the nodetool in a running Cassandra docker service on a Swarm stack deployment it is enough to execture the nodetool command inside the running container:</p>
 <pre><code class="language-bash">docker exec -it &lt;CONTAINER_ID&gt; nodetool
+#To find the CONTAINER_ID, it is possible to use `docker ps` on the node where Cassandra container is running
 </code></pre>
-<h2 id="nodetool-status"><code>nodetool status</code></h2>
+<h2 id="nodetool-status">nodetool <code>status</code></h2>
 <p>Nodetool status provides information about each node such as the status (up U or down D) and the state (normal N, leaving L, joining J, moving M), the node IP <strong>Address</strong>, the amount of data used (<strong>Load</strong>), the number of tokes, how much data is owned by the node (<strong>Owns</strong>), the <strong>Host-ID</strong> and the <strong>Rack</strong>.</p>
 <pre><code class="language-bash">--  Address    Load       Tokens       Owns (effective)  Host ID                               Rack
 UN  10.0.1.28  70.68 MiB  256          67.5%             da80b540-0424-4ad1-b64c-51cf4c46dcfe  rack1
@@ -763,7 +764,7 @@ UN  10.0.1.14  67.69 MiB  256          63.0%             e04c747d-ae77-476f-92fc
 <p>The status accept the argument <code>keyspace</code> where we can pass the name of a keyspace to get information related to this specific keyspace, in case we have set more than one.</p>
 <pre><code class="language-bash">nodetool &lt;options&gt; status &lt;keyspace&gt;
 </code></pre>
-<h2 id="nodetool-tablestats"><code>nodetool tablestats</code></h2>
+<h2 id="nodetool-tablestats">nodetool <code>tablestats</code></h2>
 <p>Nodetool tablestats provides information and statistics about keyspaces, index and tables. The information I found more interesting to check is the <strong>SSTable Compression Ratio</strong> which represents the compression ratio (e.g., 0.25 means that 10MB of information are compressed to 2.5MB in Cassadra), the <strong>Read/Write count</strong> and <strong>Local read/write count</strong> which represent the total amount of read or write requests since the startup and the <strong>Read/Write latency</strong> and <strong>Local read/write latency</strong> the round trip time in milliseconds to comple the most recent read or write request.</p>
 <pre><code class="language-yaml">Keyspace : example-case
         Read Count: 1349
