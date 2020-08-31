@@ -30,10 +30,10 @@
   
     
   
-  <meta name="description" content="PhD Candidate">
+  <meta name="description" content="Apache Cassadra is a well-known and powefurl distributed database which comes with its own tool for managing cassandra cluster and getting interesting information. In this post, I will show different nodetool commands that I found really useful.">
 
   
-  <link rel="alternate" hreflang="en-us" href="https://ga11u.github.io/category/swarm/">
+  <link rel="alternate" hreflang="en-us" href="https://ga11u.github.io/post/cassandra-using-nodetool-for-statistics/">
 
   
 
@@ -226,14 +226,12 @@
   
 
   
-  <link rel="alternate" href="/category/swarm/index.xml" type="application/rss+xml" title="Marc Page">
-  
 
   <link rel="manifest" href="/index.webmanifest">
   <link rel="icon" type="image/png" href="/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_32x32_fill_lanczos_center_2.png">
   <link rel="apple-touch-icon" type="image/png" href="/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_192x192_fill_lanczos_center_2.png">
 
-  <link rel="canonical" href="https://ga11u.github.io/category/swarm/">
+  <link rel="canonical" href="https://ga11u.github.io/post/cassandra-using-nodetool-for-statistics/">
 
   
   
@@ -249,17 +247,65 @@
   <meta property="twitter:card" content="summary">
   
   <meta property="og:site_name" content="Marc Page">
-  <meta property="og:url" content="https://ga11u.github.io/category/swarm/">
-  <meta property="og:title" content="Swarm | Marc Page">
-  <meta property="og:description" content="PhD Candidate"><meta property="og:image" content="https://ga11u.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png">
+  <meta property="og:url" content="https://ga11u.github.io/post/cassandra-using-nodetool-for-statistics/">
+  <meta property="og:title" content="Using Nodetool in Cassandra for getting interesting Statistics | Marc Page">
+  <meta property="og:description" content="Apache Cassadra is a well-known and powefurl distributed database which comes with its own tool for managing cassandra cluster and getting interesting information. In this post, I will show different nodetool commands that I found really useful."><meta property="og:image" content="https://ga11u.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png">
   <meta property="twitter:image" content="https://ga11u.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png"><meta property="og:locale" content="en-us">
   
-    <meta property="og:updated_time" content="2020-08-31T14:40:20&#43;02:00">
+    
+      <meta property="article:published_time" content="2020-08-31T16:01:50&#43;02:00">
+    
+    <meta property="article:modified_time" content="2020-08-31T16:01:50&#43;02:00">
   
 
   
 
 
+    
+
+
+
+
+
+
+  
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://ga11u.github.io/post/cassandra-using-nodetool-for-statistics/"
+  },
+  "headline": "Using Nodetool in Cassandra for getting interesting Statistics",
+  
+  "datePublished": "2020-08-31T16:01:50+02:00",
+  "dateModified": "2020-08-31T16:01:50+02:00",
+  
+  "author": {
+    "@type": "Person",
+    "name": "Marc Gallofré"
+  },
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "Marc Page",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://ga11u.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_192x192_fill_lanczos_center_2.png"
+    }
+  },
+  "description": "Apache Cassadra is a well-known and powefurl distributed database which comes with its own tool for managing cassandra cluster and getting interesting information. In this post, I will show different nodetool commands that I found really useful."
+}
+</script>
+
+  
+
+  
 
 
   
@@ -301,7 +347,7 @@
 
 
 
-  <title>Swarm | Marc Page</title>
+  <title>Using Nodetool in Cassandra for getting interesting Statistics | Marc Page</title>
 
 </head>
 <body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" >
@@ -563,6 +609,107 @@
 </nav>
 
 
+  <article class="article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+  
+  
+<div class="article-container pt-3">
+  <h1>Using Nodetool in Cassandra for getting interesting Statistics</h1>
+
+  
+
+  
+    
+
+
+<div class="article-metadata">
+
+  
+  
+  
+  
+  <div>
+    
+
+  
+  <span >Marc Gallofré</span>
+  </div>
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    Aug 31, 2020
+  </span>
+  
+
+  
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    3 min read
+  </span>
+  
+
+  
+  
+  
+
+  
+  
+  <span class="middot-divider"></span>
+  <span class="article-categories">
+    <i class="fas fa-folder mr-1"></i><a href="/category/cassandra/">Cassandra</a>, <a href="/category/nodetool/">Nodetool</a></span>
+  
+
+</div>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="btn-links mb-3">
+  
+  
+
+
+
+
+
+
+
+
   
 
 
@@ -573,59 +720,244 @@
 
 
 
-
-
-
-  
-
-  
-  
   
     
   
-<div class="universal-wrapper pt-3">
-  <h1>Swarm</h1>
 
-  
+
+
+
+
+
+
+
+
+
+
+</div>
+
 
   
 </div>
 
 
 
-<div class="universal-wrapper">
-  
+  <div class="article-container">
 
-  
-  
-    
-    
-    
-    <div>
-      <h2><a href="/post/swarm-deploying-from-private-repo/" >Deploying in Docker Swarm From Private a Repository</a></h2>
-      <div class="article-style">
-        
-          By default Docker Swarm pull images from Docker Hub, but sometimes we want to have our own private repositories and private images. Then, a few things have to be changed to allow it.
-        
-      </div>
+    <div class="article-style">
+      <p>Apache Cassadra is a well-known and powefurl distributed database which comes with its own tool for managing cassandra cluster and getting interesting information. In this post, I will show different <code>nodetool</code> commands that I found really useful.</p>
+<p>The <code>nodetool</code> command looks like:</p>
+<pre><code class="language-bash">nodetool &lt;options&gt; &lt;command&gt;
+</code></pre>
+<p>Where the basic option are the -h (&ndash;host) to pass as argument the hostname or IP address of a cassandra node and the -p (&ndash;port) to pass as a argument the port number where nodetool will make the connection (by default 7199). By can also use the -pwf (&ndash;password-file) to pass the password file path or the -pw (&ndash;password) to pass the	password string.</p>
+<p>Nodetool can be runned from either the same machine where Cassandra is installed and running or from an external machine using the apropiate options. In case we would like to use the nodetool in a running Cassandra docker service on a Swarm stack deployment it is enough to execture the nodetool command inside the running container:</p>
+<pre><code class="language-bash">docker exec -it &lt;CONTAINER_ID&gt; nodetool
+</code></pre>
+<h2 id="nodetool-status"><code>nodetool status</code></h2>
+<p>Nodetool status provides information about each node such as the status (up U or down D) and the state (normal N, leaving L, joining J, moving M), the node IP <strong>Address</strong>, the amount of data used (<strong>Load</strong>), the number of tokes, how much data is owned by the node (<strong>Owns</strong>), the <strong>Host-ID</strong> and the <strong>Rack</strong>.</p>
+<pre><code class="language-bash">--  Address    Load       Tokens       Owns (effective)  Host ID                               Rack
+UN  10.0.1.28  70.68 MiB  256          67.5%             da80b540-0424-4ad1-b64c-51cf4c46dcfe  rack1
+UN  10.0.1.12  73.48 MiB  256          69.4%             fd8af11e-f1d9-4adb-abe5-84925113f9bb  rack1
+UN  10.0.1.14  67.69 MiB  256          63.0%             e04c747d-ae77-476f-92fc-34bda99ab1e4  rack1
+</code></pre>
+<p>The status accept the argument <code>keyspace</code> where we can pass the name of a keyspace to get information related to this specific keyspace, in case we have set more than one.</p>
+<pre><code class="language-bash">nodetool &lt;options&gt; status &lt;keyspace&gt;
+</code></pre>
+<h2 id="nodetool-tablestats"><code>nodetool tablestats</code></h2>
+<p>Nodetool tablestats provides information and statistics about keyspaces, index and tables. The information I found more interesting to check is the <strong>SSTable Compression Ratio</strong> which represents the compression ratio (e.g., 0.25 means that 10MB of information are compressed to 2.5MB in Cassadra), the <strong>Read/Write count</strong> and <strong>Local read/write count</strong> which represent the total amount of read or write requests since the startup and the <strong>Read/Write latency</strong> and <strong>Local read/write latency</strong> the round trip time in milliseconds to comple the most recent read or write request.</p>
+<pre><code class="language-yaml">Keyspace : example-case
+        Read Count: 1349
+        Read Latency: 0.245 ms
+        Write Count: 4032
+        Write Latency: 0.10584201388888889 ms
+        Pending Flushes: 0
+                Table: corpus
+                SSTable count: 1
+                Space used (live): 74714036
+                Space used (total): 74714036
+                Space used by snapshots (total): 0
+                Off heap memory used (total): 95800
+                SSTable Compression Ratio: 0.25010121781248695
+                Number of partitions (estimate): 42120
+                Memtable cell count: 1344
+                Memtable data size: 11265339
+                Memtable off heap memory used: 0
+                Memtable switch count: 0
+                Local read count: 345
+                Local read latency: 0.226478953 ms
+                Local write count: 1344
+                Local write latency: 0.1053876324 ms
+... 
+[output truncated]
+</code></pre>
+<p>With tablestats is possible to provide the argument <code>&lt;keyspace.table&gt;</code> to visualise stats for a specific keyspace or table.</p>
+<pre><code>nodetool &lt;options&gt; tablestats &lt;keyspace.table&gt;
+</code></pre>
+
     </div>
-  
-    
-    
-    
-    <div>
-      <h2><a href="/post/updating-doker-containers-without-downtime/" >Updating Doker Containers Without Downtime</a></h2>
-      <div class="article-style">
-        
-          How to update and modify a running docker container without downtime using Docker Swarm and docker-compose
-        
-      </div>
-    </div>
-  
 
-  
+    
 
+
+
+
+
+
+<div class="article-tags">
+  
+  <a class="badge badge-light" href="/tag/cassandra/">Cassandra</a>
+  
+  <a class="badge badge-light" href="/tag/nodetool/">Nodetool</a>
+  
 </div>
+
+
+
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://twitter.com/intent/tweet?url=https://ga11u.github.io/post/cassandra-using-nodetool-for-statistics/&amp;text=Using%20Nodetool%20in%20Cassandra%20for%20getting%20interesting%20Statistics" target="_blank" rel="noopener" class="share-btn-twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.facebook.com/sharer.php?u=https://ga11u.github.io/post/cassandra-using-nodetool-for-statistics/&amp;t=Using%20Nodetool%20in%20Cassandra%20for%20getting%20interesting%20Statistics" target="_blank" rel="noopener" class="share-btn-facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="mailto:?subject=Using%20Nodetool%20in%20Cassandra%20for%20getting%20interesting%20Statistics&amp;body=https://ga11u.github.io/post/cassandra-using-nodetool-for-statistics/" target="_blank" rel="noopener" class="share-btn-email">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=https://ga11u.github.io/post/cassandra-using-nodetool-for-statistics/&amp;title=Using%20Nodetool%20in%20Cassandra%20for%20getting%20interesting%20Statistics" target="_blank" rel="noopener" class="share-btn-linkedin">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="whatsapp://send?text=Using%20Nodetool%20in%20Cassandra%20for%20getting%20interesting%20Statistics%20https://ga11u.github.io/post/cassandra-using-nodetool-for-statistics/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://service.weibo.com/share/share.php?url=https://ga11u.github.io/post/cassandra-using-nodetool-for-statistics/&amp;title=Using%20Nodetool%20in%20Cassandra%20for%20getting%20interesting%20Statistics" target="_blank" rel="noopener" class="share-btn-weibo">
+          <i class="fab fa-weibo"></i>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <div class="article-widget content-widget-hr">
+    <h3>Related</h3>
+    <ul>
+      
+      <li><a href="/post/expanding-cassandra-data-volumes/">Expanding Cassandra Data Volumes</a></li>
+      
+      <li><a href="/post/swarm-deploying-from-private-repo/">Deploying in Docker Swarm From Private a Repository</a></li>
+      
+      <li><a href="/post/expanding-blazegraph-data-volumes/">Expanding Blazegraph Data Volume</a></li>
+      
+      <li><a href="/post/blazegraph-scale-out/">Scaling-out Blazegraph, is it possible?</a></li>
+      
+      <li><a href="/post/triplestores-scale-out/">Is It Possible to Sale-out Open Source Triple-Stores?</a></li>
+      
+    </ul>
+  </div>
+  
+
+
+
+
+
+  </div>
+</article>
 
       
 

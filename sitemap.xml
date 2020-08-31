@@ -4,12 +4,57 @@
   
   <url>
     <loc>https://ga11u.github.io/authors/</loc>
-    <lastmod>2020-08-31T14:40:20+02:00</lastmod>
+    <lastmod>2020-08-31T16:01:50+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ga11u.github.io/tag/cassandra/</loc>
+    <lastmod>2020-08-31T16:01:50+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ga11u.github.io/category/cassandra/</loc>
+    <lastmod>2020-08-31T16:01:50+02:00</lastmod>
   </url>
   
   <url>
     <loc>https://ga11u.github.io/categories/</loc>
-    <lastmod>2020-08-31T14:40:20+02:00</lastmod>
+    <lastmod>2020-08-31T16:01:50+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ga11u.github.io/author/marc-gallofre/</loc>
+    <lastmod>2020-08-31T16:01:50+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ga11u.github.io/</loc>
+    <lastmod>2020-08-31T16:01:50+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ga11u.github.io/tag/nodetool/</loc>
+    <lastmod>2020-08-31T16:01:50+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ga11u.github.io/category/nodetool/</loc>
+    <lastmod>2020-08-31T16:01:50+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ga11u.github.io/post/</loc>
+    <lastmod>2020-08-31T16:01:50+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ga11u.github.io/tags/</loc>
+    <lastmod>2020-08-31T16:01:50+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ga11u.github.io/post/cassandra-using-nodetool-for-statistics/</loc>
+    <lastmod>2020-08-31T16:01:50+02:00</lastmod>
   </url>
   
   <url>
@@ -24,21 +69,6 @@
   
   <url>
     <loc>https://ga11u.github.io/category/docker/</loc>
-    <lastmod>2020-08-31T14:40:20+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://ga11u.github.io/author/marc-gallofre/</loc>
-    <lastmod>2020-08-31T14:40:20+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://ga11u.github.io/</loc>
-    <lastmod>2020-08-31T14:40:20+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://ga11u.github.io/post/</loc>
     <lastmod>2020-08-31T14:40:20+02:00</lastmod>
   </url>
   
@@ -59,11 +89,6 @@
   
   <url>
     <loc>https://ga11u.github.io/category/swarm/</loc>
-    <lastmod>2020-08-31T14:40:20+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://ga11u.github.io/tags/</loc>
     <lastmod>2020-08-31T14:40:20+02:00</lastmod>
   </url>
   
@@ -105,16 +130,6 @@
   <url>
     <loc>https://ga11u.github.io/category/triple-store/</loc>
     <lastmod>2020-08-27T16:51:52+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://ga11u.github.io/tag/cassandra/</loc>
-    <lastmod>2020-08-27T16:51:31+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://ga11u.github.io/category/cassandra/</loc>
-    <lastmod>2020-08-27T16:51:31+02:00</lastmod>
   </url>
   
   <url>

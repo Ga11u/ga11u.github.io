@@ -35,7 +35,6 @@
         published: 7000
       - target: 9042
         published: 9042
-        mode: host
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;This service creates an Apache Cassandra node which is connected in a cluster to other 2 nodes, making a cluster of 3 nodes. It also opens the ports 7000 and 9042.&lt;/p&gt;
 &lt;p&gt;Now, we run &lt;code&gt;docker stack deploy -c docker-compose.yml example_project&lt;/code&gt; and our cluster of 3 nodes is succesfuly running and working. So far, so god!&lt;/p&gt;

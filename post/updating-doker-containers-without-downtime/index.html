@@ -763,7 +763,6 @@
         published: 7000
       - target: 9042
         published: 9042
-        mode: host
 </code></pre>
 <p>This service creates an Apache Cassandra node which is connected in a cluster to other 2 nodes, making a cluster of 3 nodes. It also opens the ports 7000 and 9042.</p>
 <p>Now, we run <code>docker stack deploy -c docker-compose.yml example_project</code> and our cluster of 3 nodes is succesfuly running and working. So far, so god!</p>
@@ -971,7 +970,7 @@
         
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/languages/r.min.js"></script>
         
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/languages/shell.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/languages/bash.min.js"></script>
         
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/languages/yaml.min.js"></script>
         

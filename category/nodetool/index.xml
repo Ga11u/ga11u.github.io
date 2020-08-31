@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Cassandra | Marc Page</title>
-    <link>https://ga11u.github.io/tag/cassandra/</link>
-      <atom:link href="https://ga11u.github.io/tag/cassandra/index.xml" rel="self" type="application/rss+xml" />
-    <description>Cassandra</description>
+    <title>Nodetool | Marc Page</title>
+    <link>https://ga11u.github.io/category/nodetool/</link>
+      <atom:link href="https://ga11u.github.io/category/nodetool/index.xml" rel="self" type="application/rss+xml" />
+    <description>Nodetool</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Mon, 31 Aug 2020 16:01:50 +0200</lastBuildDate>
     <image>
       <url>https://ga11u.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png</url>
-      <title>Cassandra</title>
-      <link>https://ga11u.github.io/tag/cassandra/</link>
+      <title>Nodetool</title>
+      <link>https://ga11u.github.io/category/nodetool/</link>
     </image>
     
     <item>
@@ -66,14 +66,6 @@ UN  10.0.1.14  67.69 MiB  256          63.0%             e04c747d-ae77-476f-92fc
 &lt;pre&gt;&lt;code&gt;nodetool &amp;lt;options&amp;gt; tablestats &amp;lt;keyspace.table&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;
 </description>
-    </item>
-    
-    <item>
-      <title>Expanding Cassandra Data Volumes</title>
-      <link>https://ga11u.github.io/post/expanding-cassandra-data-volumes/</link>
-      <pubDate>Thu, 27 Aug 2020 16:51:31 +0200</pubDate>
-      <guid>https://ga11u.github.io/post/expanding-cassandra-data-volumes/</guid>
-      <description></description>
     </item>
     
   </channel>

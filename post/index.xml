@@ -5,12 +5,68 @@
     <link>https://ga11u.github.io/post/</link>
       <atom:link href="https://ga11u.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     <description>Posts</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Mon, 31 Aug 2020 14:40:20 +0200</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Mon, 31 Aug 2020 16:01:50 +0200</lastBuildDate>
     <image>
       <url>https://ga11u.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png</url>
       <title>Posts</title>
       <link>https://ga11u.github.io/post/</link>
     </image>
+    
+    <item>
+      <title>Using Nodetool in Cassandra for getting interesting Statistics</title>
+      <link>https://ga11u.github.io/post/cassandra-using-nodetool-for-statistics/</link>
+      <pubDate>Mon, 31 Aug 2020 16:01:50 +0200</pubDate>
+      <guid>https://ga11u.github.io/post/cassandra-using-nodetool-for-statistics/</guid>
+      <description>&lt;p&gt;Apache Cassadra is a well-known and powefurl distributed database which comes with its own tool for managing cassandra cluster and getting interesting information. In this post, I will show different &lt;code&gt;nodetool&lt;/code&gt; commands that I found really useful.&lt;/p&gt;
+&lt;p&gt;The &lt;code&gt;nodetool&lt;/code&gt; command looks like:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;nodetool &amp;lt;options&amp;gt; &amp;lt;command&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Where the basic option are the -h (&amp;ndash;host) to pass as argument the hostname or IP address of a cassandra node and the -p (&amp;ndash;port) to pass as a argument the port number where nodetool will make the connection (by default 7199). By can also use the -pwf (&amp;ndash;password-file) to pass the password file path or the -pw (&amp;ndash;password) to pass the	password string.&lt;/p&gt;
+&lt;p&gt;Nodetool can be runned from either the same machine where Cassandra is installed and running or from an external machine using the apropiate options. In case we would like to use the nodetool in a running Cassandra docker service on a Swarm stack deployment it is enough to execture the nodetool command inside the running container:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;docker exec -it &amp;lt;CONTAINER_ID&amp;gt; nodetool
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;nodetool-status&#34;&gt;&lt;code&gt;nodetool status&lt;/code&gt;&lt;/h2&gt;
+&lt;p&gt;Nodetool status provides information about each node such as the status (up U or down D) and the state (normal N, leaving L, joining J, moving M), the node IP &lt;strong&gt;Address&lt;/strong&gt;, the amount of data used (&lt;strong&gt;Load&lt;/strong&gt;), the number of tokes, how much data is owned by the node (&lt;strong&gt;Owns&lt;/strong&gt;), the &lt;strong&gt;Host-ID&lt;/strong&gt; and the &lt;strong&gt;Rack&lt;/strong&gt;.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;--  Address    Load       Tokens       Owns (effective)  Host ID                               Rack
+UN  10.0.1.28  70.68 MiB  256          67.5%             da80b540-0424-4ad1-b64c-51cf4c46dcfe  rack1
+UN  10.0.1.12  73.48 MiB  256          69.4%             fd8af11e-f1d9-4adb-abe5-84925113f9bb  rack1
+UN  10.0.1.14  67.69 MiB  256          63.0%             e04c747d-ae77-476f-92fc-34bda99ab1e4  rack1
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The status accept the argument &lt;code&gt;keyspace&lt;/code&gt; where we can pass the name of a keyspace to get information related to this specific keyspace, in case we have set more than one.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;nodetool &amp;lt;options&amp;gt; status &amp;lt;keyspace&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;nodetool-tablestats&#34;&gt;&lt;code&gt;nodetool tablestats&lt;/code&gt;&lt;/h2&gt;
+&lt;p&gt;Nodetool tablestats provides information and statistics about keyspaces, index and tables. The information I found more interesting to check is the &lt;strong&gt;SSTable Compression Ratio&lt;/strong&gt; which represents the compression ratio (e.g., 0.25 means that 10MB of information are compressed to 2.5MB in Cassadra), the &lt;strong&gt;Read/Write count&lt;/strong&gt; and &lt;strong&gt;Local read/write count&lt;/strong&gt; which represent the total amount of read or write requests since the startup and the &lt;strong&gt;Read/Write latency&lt;/strong&gt; and &lt;strong&gt;Local read/write latency&lt;/strong&gt; the round trip time in milliseconds to comple the most recent read or write request.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-yaml&#34;&gt;Keyspace : example-case
+        Read Count: 1349
+        Read Latency: 0.245 ms
+        Write Count: 4032
+        Write Latency: 0.10584201388888889 ms
+        Pending Flushes: 0
+                Table: corpus
+                SSTable count: 1
+                Space used (live): 74714036
+                Space used (total): 74714036
+                Space used by snapshots (total): 0
+                Off heap memory used (total): 95800
+                SSTable Compression Ratio: 0.25010121781248695
+                Number of partitions (estimate): 42120
+                Memtable cell count: 1344
+                Memtable data size: 11265339
+                Memtable off heap memory used: 0
+                Memtable switch count: 0
+                Local read count: 345
+                Local read latency: 0.226478953 ms
+                Local write count: 1344
+                Local write latency: 0.1053876324 ms
+... 
+[output truncated]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;With tablestats is possible to provide the argument &lt;code&gt;&amp;lt;keyspace.table&amp;gt;&lt;/code&gt; to visualise stats for a specific keyspace or table.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;nodetool &amp;lt;options&amp;gt; tablestats &amp;lt;keyspace.table&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
     
     <item>
       <title>Deploying in Docker Swarm From Private a Repository</title>
@@ -21,12 +77,12 @@
 &lt;p&gt;In this guide, I will show you how to do it, by using the example of GitLab repositories.&lt;/p&gt;
 &lt;p&gt;Lets assume that we have our private images in GitLab and we have already deployed a swarm stack called &lt;code&gt;example-project&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;The first thing you need to do is:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;docker login &amp;lt;gitlab-url&amp;gt;:&amp;lt;repository-port&amp;gt;
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;docker login &amp;lt;gitlab-url&amp;gt;:&amp;lt;repository-port&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;You will need to check the port with your GitLab or repository provider, a common used port in GitLab is 4567.&lt;/p&gt;
 &lt;p&gt;Then you will be asked to provide your &lt;code&gt;username&lt;/code&gt; and password. The &lt;code&gt;password&lt;/code&gt; is often a token or a secure key you have created only for accessing to your private repository.&lt;/p&gt;
 &lt;p&gt;Finnaly, you can deploy your stack as always by adding the option &lt;code&gt;--with-registry-auth&lt;/code&gt;.&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-shell&#34;&gt;docker stack deploy -c docker-compose.yml example-project --with-registry-auth
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;docker stack deploy -c docker-compose.yml example-project --with-registry-auth
 &lt;/code&gt;&lt;/pre&gt;
 </description>
     </item>
@@ -54,7 +110,6 @@
         published: 7000
       - target: 9042
         published: 9042
-        mode: host
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;This service creates an Apache Cassandra node which is connected in a cluster to other 2 nodes, making a cluster of 3 nodes. It also opens the ports 7000 and 9042.&lt;/p&gt;
 &lt;p&gt;Now, we run &lt;code&gt;docker stack deploy -c docker-compose.yml example_project&lt;/code&gt; and our cluster of 3 nodes is succesfuly running and working. So far, so god!&lt;/p&gt;
