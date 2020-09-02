@@ -13,7 +13,7 @@
     </image>
     
     <item>
-      <title>Deploying in Docker Swarm From Private a Repository</title>
+      <title>Deploying in Docker Swarm From a Private Repository</title>
       <link>https://ga11u.github.io/post/swarm-deploying-from-private-repo/</link>
       <pubDate>Mon, 31 Aug 2020 14:40:20 +0200</pubDate>
       <guid>https://ga11u.github.io/post/swarm-deploying-from-private-repo/</guid>

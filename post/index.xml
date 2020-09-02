@@ -13,7 +13,7 @@
     </image>
     
     <item>
-      <title>Using Nodetool in Cassandra for getting interesting Statistics</title>
+      <title>Using Nodetool in Cassandra for Interesting Statistics</title>
       <link>https://ga11u.github.io/post/cassandra-using-nodetool-for-statistics/</link>
       <pubDate>Mon, 31 Aug 2020 16:01:50 +0200</pubDate>
       <guid>https://ga11u.github.io/post/cassandra-using-nodetool-for-statistics/</guid>
@@ -70,7 +70,7 @@ UN  10.0.1.14  67.69 MiB  256          63.0%             e04c747d-ae77-476f-92fc
     </item>
     
     <item>
-      <title>Deploying in Docker Swarm From Private a Repository</title>
+      <title>Deploying in Docker Swarm From a Private Repository</title>
       <link>https://ga11u.github.io/post/swarm-deploying-from-private-repo/</link>
       <pubDate>Mon, 31 Aug 2020 14:40:20 +0200</pubDate>
       <guid>https://ga11u.github.io/post/swarm-deploying-from-private-repo/</guid>
