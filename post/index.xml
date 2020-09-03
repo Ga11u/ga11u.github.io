@@ -5,12 +5,55 @@
     <link>https://ga11u.github.io/post/</link>
       <atom:link href="https://ga11u.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     <description>Posts</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Mon, 31 Aug 2020 16:01:50 +0200</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Thu, 03 Sep 2020 12:53:52 +0200</lastBuildDate>
     <image>
       <url>https://ga11u.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png</url>
       <title>Posts</title>
       <link>https://ga11u.github.io/post/</link>
     </image>
+    
+    <item>
+      <title>Upgrading a Cloud Infrastructure With Terraform</title>
+      <link>https://ga11u.github.io/post/upgrading-cloud-platform-with-terraform/</link>
+      <pubDate>Thu, 03 Sep 2020 12:53:52 +0200</pubDate>
+      <guid>https://ga11u.github.io/post/upgrading-cloud-platform-with-terraform/</guid>
+      <description>&lt;p&gt;Upgrading a running cloud infrastructure is a critical task that have to planned carefully in advance. Before choosing which strategy to follow for upgrading, we have to asks ourselves some questions:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Is okay for us to have some downtime in our service? Can we stop our services and for how long?&lt;/li&gt;
+&lt;li&gt;Is there any data compromised which need to be saved and restored?&lt;/li&gt;
+&lt;li&gt;Do we really need to updrage our infrastructure?&lt;/li&gt;
+&lt;li&gt;Is there any security risk in doing so?&lt;/li&gt;
+&lt;li&gt;Do we have the necessary resources?&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;In this article we will deal with the scenario where we can have some downtime and there is data that need to be saved and restored.&lt;/p&gt;
+&lt;p&gt;In our scenario we start with 11 instances running in a OpenStack cloud provider, with the following configuration:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;3 x m1.medium instances (1 VCPUs + 4GB RAM)&lt;/li&gt;
+&lt;li&gt;6 x m1.large instances (2 VCPUs + 8GB RAM)&lt;/li&gt;
+&lt;li&gt;2 x m1.xlarge instances (4 VCPUs + 16GB RAM)&lt;/li&gt;
+&lt;li&gt;6 x 80GB disk&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;In these instances, we have a Docker Swarm platform running in all instances wirh real-time processes, 3 Apache Cassandra nodes and 3 Blazegraph nodes running.&lt;/p&gt;
+&lt;p&gt;We want to upgrade our infrastructure to:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;4 x m1.medium instances (1 VCPUs + 4GB RAM)&lt;/li&gt;
+&lt;li&gt;9 x m1.large instances (2 VCPUs + 8GB RAM)&lt;/li&gt;
+&lt;li&gt;4 x m1.xlarge instances (4 VCPUs + 16GB RAM)&lt;/li&gt;
+&lt;li&gt;3 x 3TB disk&lt;/li&gt;
+&lt;li&gt;1 x 11TB disk&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The Apache Cassandra and Blazegraph data need to be migrated to the new disks and all services will have to start running again with the minimun downtime possible.&lt;/p&gt;
+&lt;p&gt;To do so, we will make use of Terraform, to modify the previous configuration with the need requirments and create volume disks snaptshots for migrating our data.&lt;/p&gt;
+&lt;h2 id=&#34;creating-voume-disks-snaptshots&#34;&gt;Creating voume disks snaptshots&lt;/h2&gt;
+&lt;p&gt;First, we need to backup our data. To do so, we can either use an external service such as Google Cloud Storage or use the OpenStack&amp;rsquo;s volume snaptshots. In any case, my advice is to stop the services running in the instances where you have the data to avoid any data corruption during the process.&lt;/p&gt;
+&lt;p&gt;In our cause, we are going to create volume snapshots with OpenStack and rememeber the snapshot ID, which will be needed leter with Terraform configuration.&lt;/p&gt;
+&lt;div class=&#34;alert alert-warning&#34;&gt;
+  &lt;div&gt;
+    Although this is the first step, if you are working in a real-time environment I recommend to do it at the end before you run Terraform, to minimaice the data loss during the downtime.
+  &lt;/div&gt;
+&lt;/div&gt;
+</description>
+    </item>
     
     <item>
       <title>Using Nodetool in Cassandra for Interesting Statistics</title>
