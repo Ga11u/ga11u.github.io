@@ -248,7 +248,7 @@
   
   <meta property="og:site_name" content="Marc Page">
   <meta property="og:url" content="https://ga11u.github.io/post/upgrading-cloud-platform-with-terraform/">
-  <meta property="og:title" content="Upgrading a Cloud Infrastructure With Terraform | Marc Page">
+  <meta property="og:title" content="Upgrading a Cloud Infrastructure With Terraform and ANsible | Marc Page">
   <meta property="og:description" content="Upgrading a running cloud infrastructure is a critical task that have to planned carefully in advance. Before choosing which strategy to follow for upgrading, we have to asks ourselves some questions:"><meta property="og:image" content="https://ga11u.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png">
   <meta property="twitter:image" content="https://ga11u.github.io/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png"><meta property="og:locale" content="en-us">
   
@@ -281,7 +281,7 @@
     "@type": "WebPage",
     "@id": "https://ga11u.github.io/post/upgrading-cloud-platform-with-terraform/"
   },
-  "headline": "Upgrading a Cloud Infrastructure With Terraform",
+  "headline": "Upgrading a Cloud Infrastructure With Terraform and ANsible",
   
   "datePublished": "2020-09-03T12:53:52+02:00",
   "dateModified": "2020-09-03T12:53:52+02:00",
@@ -347,7 +347,7 @@
 
 
 
-  <title>Upgrading a Cloud Infrastructure With Terraform | Marc Page</title>
+  <title>Upgrading a Cloud Infrastructure With Terraform and ANsible | Marc Page</title>
 
 </head>
 <body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" >
@@ -630,10 +630,10 @@
   
   
 <div class="article-container pt-3">
-  <h1>Upgrading a Cloud Infrastructure With Terraform</h1>
+  <h1>Upgrading a Cloud Infrastructure With Terraform and ANsible</h1>
 
   
-  <p class="page-subtitle">Upgrading and expanding instances and volumes with Terraform in a OpenStack Cloud environment</p>
+  <p class="page-subtitle">Upgrading and expanding instances and volumes with Terraform and Ansible in a OpenStack Cloud environment</p>
   
 
   
@@ -670,7 +670,7 @@
   
   <span class="middot-divider"></span>
   <span class="article-reading-time">
-    2 min read
+    6 min read
   </span>
   
 
@@ -682,7 +682,7 @@
   
   <span class="middot-divider"></span>
   <span class="article-categories">
-    <i class="fas fa-folder mr-1"></i><a href="/category/terraform/">Terraform</a>, <a href="/category/open-stack/">Open Stack</a>, <a href="/category/cloud-infrastructure/">Cloud Infrastructure</a>, <a href="/category/news-hunter/">News Hunter</a></span>
+    <i class="fas fa-folder mr-1"></i><a href="/category/terraform/">Terraform</a>, <a href="/category/ansible/">Ansible</a>, <a href="/category/open-stack/">Open Stack</a>, <a href="/category/cloud-infrastructure/">Cloud Infrastructure</a>, <a href="/category/news-hunter/">News Hunter</a></span>
   
 
 </div>
@@ -763,7 +763,7 @@
 <li>2 x m1.xlarge instances (4 VCPUs + 16GB RAM)</li>
 <li>6 x 80GB disk</li>
 </ul>
-<p>In these instances, we have a Docker Swarm platform running in all instances wirh real-time processes, 3 Apache Cassandra nodes and 3 Blazegraph nodes running.</p>
+<p>We have a Docker Swarm platform running in all instances with services to run real-time processes, 3 Apache Cassandra nodes, 3 Blazegraph nodes, 3 Zookeeper nodes, 3 Kafka nodes, a Mongo DB and other services.</p>
 <p>We want to upgrade our infrastructure to:</p>
 <ul>
 <li>4 x m1.medium instances (1 VCPUs + 4GB RAM)</li>
@@ -773,15 +773,104 @@
 <li>1 x 11TB disk</li>
 </ul>
 <p>The Apache Cassandra and Blazegraph data need to be migrated to the new disks and all services will have to start running again with the minimun downtime possible.</p>
-<p>To do so, we will make use of Terraform, to modify the previous configuration with the need requirments and create volume disks snaptshots for migrating our data.</p>
+<p>To do so, we will make use of Terraform, to modify the previous configuration with the need requirments and create volume disks snaptshots for migrating our data. Then, with Ansible we will mount the new volumes with the migrated data and install the Docker Swarm platform again.</p>
 <h2 id="creating-voume-disks-snaptshots">Creating voume disks snaptshots</h2>
 <p>First, we need to backup our data. To do so, we can either use an external service such as Google Cloud Storage or use the OpenStack&rsquo;s volume snaptshots. In any case, my advice is to stop the services running in the instances where you have the data to avoid any data corruption during the process.</p>
 <p>In our cause, we are going to create volume snapshots with OpenStack and rememeber the snapshot ID, which will be needed leter with Terraform configuration.</p>
-<div class="alert alert-warning">
+<div class="alert alert-">
   <div>
     Although this is the first step, if you are working in a real-time environment I recommend to do it at the end before you run Terraform, to minimaice the data loss during the downtime.
   </div>
 </div>
+<p>As our platform is using Swarm to orquestrate docker containers, we don&rsquo;t have an option to stop a running container as it is with docker-compose or stand-alone containers. Thus, we will have to remove the running service to stop it:</p>
+<pre><code class="language-bash">docker service rm &lt;service-name&gt;
+</code></pre>
+<p>The removing process of a service may take sometime, thus it is important to verify that the manager have removed the service:</p>
+<pre><code class="language-bash">docker service inspect &lt;service-name&gt;
+</code></pre>
+<p>As well as, to verify that the service was removed from the node where it was running:</p>
+<pre><code class="language-bash">docker ps
+</code></pre>
+<p>If the service does not appear, then we can be sure that we successfuly removed the service and we can process to create a spanshot.</p>
+<p>Once the service has been removed, we can proceed to detach the volume from the instance and create the snapshot. This process can be done manually from the OpenStack Dashboard or CLI. When detaching the volume from the instance, the status of the volum should appear as <strong>Available</strong> instead of <strong>In-use</strong>. The snapshot cam be created with attached volumes too, however doing a snapshot with a detached volume is safer and recomended for our purpose.</p>
+<div class="alert alert-">
+  <div>
+    It is not possible to delete the old volumes, because they have an assigned snapshot. To delete them, first we have to delete the snapshots. This process, should be done at the end, once we have verified that our data migration succeded.
+  </div>
+</div>
+<h2 id="upadating-terraform-files">Upadating Terraform files</h2>
+<p>The Terraform files configuration should be updated to reflect our desired newer configuration.</p>
+<p>The flavors type and the amount of instances for each type can be updated like this, where we map the type of instance to their characteristics and numbers.</p>
+<pre><code class="language-json">flavor_name = {
+	&quot;manager&quot; = &quot;m1.medium&quot;,
+	&quot;cassandra&quot; = &quot;m1.large&quot;,
+	&quot;blazegraph&quot; = &quot;m1.xlarge&quot;,
+	&quot;worker&quot; = &quot;m1.large&quot;,
+	&quot;hpc-worker&quot; = &quot;m1.xlarge&quot;,
+	&quot;mongo&quot; = &quot;m1.medium&quot;,
+	&quot;zookafka&quot; = &quot;m1.large&quot;
+}
+
+instance_count = {
+	&quot;manager&quot; = 3,
+	&quot;cassandra&quot; = 3,
+	&quot;blazegraph&quot; = 1,
+	&quot;worker&quot; = 3,
+	&quot;hpc-worker&quot; = 3,
+	&quot;mongo&quot; = 1,
+	&quot;zookafka&quot; = 3
+}
+</code></pre>
+<p>The image used in the instances can be updated to a newer version. It is important to check the image version since the images can be outdated or unavailable. To look for updated and available images:</p>
+<pre><code class="language-bash">openstack image list --status active
+</code></pre>
+<p>To update the terraform file with the desired image, use the <strong>Image ID</strong> instead of the image name to ensure that you always use the same image:</p>
+<pre><code class="language-json">image_id = {
+	&quot;Ubuntu20.04LTS&quot; = &quot;7085d64d-f591-4a23-bdfe-dbbd1288afcf&quot;
+}
+</code></pre>
+<p>To create new instances, we have to define new resources. In that case, we are creating a new <strong>hpc-worker</strong> instance using the previous maped values. The <code>count</code> key is used to create multple instances according to our previous declared variable <code>instance_count</code>, and the same apply for the other variables mapings (<code>var.</code>). The <code>count.index</code> is used to extract the index of each instance [0,1,2 &hellip; n) and generate a name like <em>hpc-worker-0</em> for the first instance.</p>
+<pre><code class="language-json">resource &quot;openstack_compute_instance_v2&quot; &quot;hpc-worker&quot; {
+    count = var.instance_count[&quot;hpc-worker&quot;]
+    name = &quot;${var.node_name[&quot;hpc-worker&quot;]}-${count.index}&quot;
+    image_id = var.image_id[var.image_name[&quot;image&quot;]]
+    flavor_name = var.flavor_name[&quot;hpc-worker&quot;]
+    key_pair = var.key_pub
+    security_groups = var.security_group
+    network {
+        name = var.network
+    }
+    metadata = {
+        ssh_user = var.role_ssh_user[&quot;hpc-worker&quot;],
+        prefer_ipv6 = false,
+        my_server_role = var.node_name[&quot;hpc-worker&quot;],
+	python_bin = &quot;/usr/bin/python3&quot;
+    }
+}
+</code></pre>
+<p>To create a 3TB volume using the previous volume snapshot, so the data will be migrated to the new volume. Thus, we need to indicate the <code>snapshot_id</code> which we want to use. If the snpashot is smaller than the new volume, we will need to expand the volume later, otherwise our instance will not use the full volume capacity. To attach the volume to the new instance, we need to provide the <code>instance_id</code> where we want to attach the volume and the <code>volum_id</code> to attach.</p>
+<pre><code class="language-json">resource &quot;openstack_blockstorage_volume_v3&quot; &quot;volume_cassandra_1&quot; {
+    name = &quot;${var.volume_name}-cassandra-1&quot;
+    size = 3000
+    snapshot_id = &quot;f2714817-f9f8-42f3-aa7c-363d7b887983&quot;
+}
+
+resource &quot;openstack_compute_volume_attach_v2&quot; &quot;attach_cassandra_volume_0_to_db_instances&quot; {
+    instance_id = openstack_compute_instance_v2.cassandra[1].id
+    volume_id = openstack_blockstorage_volume_v3.volume_cassandra_1.id
+}
+</code></pre>
+<h2 id="upgrading-our-infrastrcutre-with-terraform">Upgrading our infrastrcutre with Terraform</h2>
+<p>Once we have defined our desired infrastructure, we can start with the deployment:</p>
+<pre><code>terraform plan
+terraform apply
+</code></pre>
+<h2 id="mounting-expanding-disks-and-ploying-docker-swarm-with-ansible">Mounting, expanding disks and ploying Docker Swarm with Ansible</h2>
+<ul>
+<li>mkdir -p /mnt/data</li>
+<li>sudo mount /dev/sdb /mnt/data</li>
+<li>xfs_growfs /dev/sdb</li>
+</ul>
 
     </div>
 
@@ -795,6 +884,8 @@
 <div class="article-tags">
   
   <a class="badge badge-light" href="/tag/terraform/">Terraform</a>
+  
+  <a class="badge badge-light" href="/tag/ansible/">Ansible</a>
   
   <a class="badge badge-light" href="/tag/open-stack/">Open Stack</a>
   
@@ -817,7 +908,7 @@
       
       
       <li>
-        <a href="https://twitter.com/intent/tweet?url=https://ga11u.github.io/post/upgrading-cloud-platform-with-terraform/&amp;text=Upgrading%20a%20Cloud%20Infrastructure%20With%20Terraform" target="_blank" rel="noopener" class="share-btn-twitter">
+        <a href="https://twitter.com/intent/tweet?url=https://ga11u.github.io/post/upgrading-cloud-platform-with-terraform/&amp;text=Upgrading%20a%20Cloud%20Infrastructure%20With%20Terraform%20and%20ANsible" target="_blank" rel="noopener" class="share-btn-twitter">
           <i class="fab fa-twitter"></i>
         </a>
       </li>
@@ -830,7 +921,7 @@
       
       
       <li>
-        <a href="https://www.facebook.com/sharer.php?u=https://ga11u.github.io/post/upgrading-cloud-platform-with-terraform/&amp;t=Upgrading%20a%20Cloud%20Infrastructure%20With%20Terraform" target="_blank" rel="noopener" class="share-btn-facebook">
+        <a href="https://www.facebook.com/sharer.php?u=https://ga11u.github.io/post/upgrading-cloud-platform-with-terraform/&amp;t=Upgrading%20a%20Cloud%20Infrastructure%20With%20Terraform%20and%20ANsible" target="_blank" rel="noopener" class="share-btn-facebook">
           <i class="fab fa-facebook"></i>
         </a>
       </li>
@@ -843,7 +934,7 @@
       
       
       <li>
-        <a href="mailto:?subject=Upgrading%20a%20Cloud%20Infrastructure%20With%20Terraform&amp;body=https://ga11u.github.io/post/upgrading-cloud-platform-with-terraform/" target="_blank" rel="noopener" class="share-btn-email">
+        <a href="mailto:?subject=Upgrading%20a%20Cloud%20Infrastructure%20With%20Terraform%20and%20ANsible&amp;body=https://ga11u.github.io/post/upgrading-cloud-platform-with-terraform/" target="_blank" rel="noopener" class="share-btn-email">
           <i class="fas fa-envelope"></i>
         </a>
       </li>
@@ -856,7 +947,7 @@
       
       
       <li>
-        <a href="https://www.linkedin.com/shareArticle?url=https://ga11u.github.io/post/upgrading-cloud-platform-with-terraform/&amp;title=Upgrading%20a%20Cloud%20Infrastructure%20With%20Terraform" target="_blank" rel="noopener" class="share-btn-linkedin">
+        <a href="https://www.linkedin.com/shareArticle?url=https://ga11u.github.io/post/upgrading-cloud-platform-with-terraform/&amp;title=Upgrading%20a%20Cloud%20Infrastructure%20With%20Terraform%20and%20ANsible" target="_blank" rel="noopener" class="share-btn-linkedin">
           <i class="fab fa-linkedin-in"></i>
         </a>
       </li>
@@ -869,7 +960,7 @@
       
       
       <li>
-        <a href="whatsapp://send?text=Upgrading%20a%20Cloud%20Infrastructure%20With%20Terraform%20https://ga11u.github.io/post/upgrading-cloud-platform-with-terraform/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+        <a href="whatsapp://send?text=Upgrading%20a%20Cloud%20Infrastructure%20With%20Terraform%20and%20ANsible%20https://ga11u.github.io/post/upgrading-cloud-platform-with-terraform/" target="_blank" rel="noopener" class="share-btn-whatsapp">
           <i class="fab fa-whatsapp"></i>
         </a>
       </li>
@@ -882,7 +973,7 @@
       
       
       <li>
-        <a href="https://service.weibo.com/share/share.php?url=https://ga11u.github.io/post/upgrading-cloud-platform-with-terraform/&amp;title=Upgrading%20a%20Cloud%20Infrastructure%20With%20Terraform" target="_blank" rel="noopener" class="share-btn-weibo">
+        <a href="https://service.weibo.com/share/share.php?url=https://ga11u.github.io/post/upgrading-cloud-platform-with-terraform/&amp;title=Upgrading%20a%20Cloud%20Infrastructure%20With%20Terraform%20and%20ANsible" target="_blank" rel="noopener" class="share-btn-weibo">
           <i class="fab fa-weibo"></i>
         </a>
       </li>
@@ -969,11 +1060,11 @@
         
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js" integrity="sha256-eOgo0OtLL4cdq7RdwRUiGKLX9XsIJ7nGhWEKbohmVAQ=" crossorigin="anonymous"></script>
         
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/languages/r.min.js"></script>
-        
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/languages/bash.min.js"></script>
         
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/languages/yaml.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/languages/json.min.js"></script>
         
       
 

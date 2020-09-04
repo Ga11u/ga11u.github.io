@@ -13,7 +13,7 @@
     </image>
     
     <item>
-      <title>Upgrading a Cloud Infrastructure With Terraform</title>
+      <title>Upgrading a Cloud Infrastructure With Terraform and ANsible</title>
       <link>https://ga11u.github.io/post/upgrading-cloud-platform-with-terraform/</link>
       <pubDate>Thu, 03 Sep 2020 12:53:52 +0200</pubDate>
       <guid>https://ga11u.github.io/post/upgrading-cloud-platform-with-terraform/</guid>
@@ -33,7 +33,7 @@
 &lt;li&gt;2 x m1.xlarge instances (4 VCPUs + 16GB RAM)&lt;/li&gt;
 &lt;li&gt;6 x 80GB disk&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;In these instances, we have a Docker Swarm platform running in all instances wirh real-time processes, 3 Apache Cassandra nodes and 3 Blazegraph nodes running.&lt;/p&gt;
+&lt;p&gt;We have a Docker Swarm platform running in all instances with services to run real-time processes, 3 Apache Cassandra nodes, 3 Blazegraph nodes, 3 Zookeeper nodes, 3 Kafka nodes, a Mongo DB and other services.&lt;/p&gt;
 &lt;p&gt;We want to upgrade our infrastructure to:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;4 x m1.medium instances (1 VCPUs + 4GB RAM)&lt;/li&gt;
@@ -43,15 +43,104 @@
 &lt;li&gt;1 x 11TB disk&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;The Apache Cassandra and Blazegraph data need to be migrated to the new disks and all services will have to start running again with the minimun downtime possible.&lt;/p&gt;
-&lt;p&gt;To do so, we will make use of Terraform, to modify the previous configuration with the need requirments and create volume disks snaptshots for migrating our data.&lt;/p&gt;
+&lt;p&gt;To do so, we will make use of Terraform, to modify the previous configuration with the need requirments and create volume disks snaptshots for migrating our data. Then, with Ansible we will mount the new volumes with the migrated data and install the Docker Swarm platform again.&lt;/p&gt;
 &lt;h2 id=&#34;creating-voume-disks-snaptshots&#34;&gt;Creating voume disks snaptshots&lt;/h2&gt;
 &lt;p&gt;First, we need to backup our data. To do so, we can either use an external service such as Google Cloud Storage or use the OpenStack&amp;rsquo;s volume snaptshots. In any case, my advice is to stop the services running in the instances where you have the data to avoid any data corruption during the process.&lt;/p&gt;
 &lt;p&gt;In our cause, we are going to create volume snapshots with OpenStack and rememeber the snapshot ID, which will be needed leter with Terraform configuration.&lt;/p&gt;
-&lt;div class=&#34;alert alert-warning&#34;&gt;
+&lt;div class=&#34;alert alert-&#34;&gt;
   &lt;div&gt;
     Although this is the first step, if you are working in a real-time environment I recommend to do it at the end before you run Terraform, to minimaice the data loss during the downtime.
   &lt;/div&gt;
 &lt;/div&gt;
+&lt;p&gt;As our platform is using Swarm to orquestrate docker containers, we don&amp;rsquo;t have an option to stop a running container as it is with docker-compose or stand-alone containers. Thus, we will have to remove the running service to stop it:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;docker service rm &amp;lt;service-name&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The removing process of a service may take sometime, thus it is important to verify that the manager have removed the service:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;docker service inspect &amp;lt;service-name&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;As well as, to verify that the service was removed from the node where it was running:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;docker ps
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If the service does not appear, then we can be sure that we successfuly removed the service and we can process to create a spanshot.&lt;/p&gt;
+&lt;p&gt;Once the service has been removed, we can proceed to detach the volume from the instance and create the snapshot. This process can be done manually from the OpenStack Dashboard or CLI. When detaching the volume from the instance, the status of the volum should appear as &lt;strong&gt;Available&lt;/strong&gt; instead of &lt;strong&gt;In-use&lt;/strong&gt;. The snapshot cam be created with attached volumes too, however doing a snapshot with a detached volume is safer and recomended for our purpose.&lt;/p&gt;
+&lt;div class=&#34;alert alert-&#34;&gt;
+  &lt;div&gt;
+    It is not possible to delete the old volumes, because they have an assigned snapshot. To delete them, first we have to delete the snapshots. This process, should be done at the end, once we have verified that our data migration succeded.
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;h2 id=&#34;upadating-terraform-files&#34;&gt;Upadating Terraform files&lt;/h2&gt;
+&lt;p&gt;The Terraform files configuration should be updated to reflect our desired newer configuration.&lt;/p&gt;
+&lt;p&gt;The flavors type and the amount of instances for each type can be updated like this, where we map the type of instance to their characteristics and numbers.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;flavor_name = {
+	&amp;quot;manager&amp;quot; = &amp;quot;m1.medium&amp;quot;,
+	&amp;quot;cassandra&amp;quot; = &amp;quot;m1.large&amp;quot;,
+	&amp;quot;blazegraph&amp;quot; = &amp;quot;m1.xlarge&amp;quot;,
+	&amp;quot;worker&amp;quot; = &amp;quot;m1.large&amp;quot;,
+	&amp;quot;hpc-worker&amp;quot; = &amp;quot;m1.xlarge&amp;quot;,
+	&amp;quot;mongo&amp;quot; = &amp;quot;m1.medium&amp;quot;,
+	&amp;quot;zookafka&amp;quot; = &amp;quot;m1.large&amp;quot;
+}
+
+instance_count = {
+	&amp;quot;manager&amp;quot; = 3,
+	&amp;quot;cassandra&amp;quot; = 3,
+	&amp;quot;blazegraph&amp;quot; = 1,
+	&amp;quot;worker&amp;quot; = 3,
+	&amp;quot;hpc-worker&amp;quot; = 3,
+	&amp;quot;mongo&amp;quot; = 1,
+	&amp;quot;zookafka&amp;quot; = 3
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The image used in the instances can be updated to a newer version. It is important to check the image version since the images can be outdated or unavailable. To look for updated and available images:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;openstack image list --status active
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;To update the terraform file with the desired image, use the &lt;strong&gt;Image ID&lt;/strong&gt; instead of the image name to ensure that you always use the same image:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;image_id = {
+	&amp;quot;Ubuntu20.04LTS&amp;quot; = &amp;quot;7085d64d-f591-4a23-bdfe-dbbd1288afcf&amp;quot;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;To create new instances, we have to define new resources. In that case, we are creating a new &lt;strong&gt;hpc-worker&lt;/strong&gt; instance using the previous maped values. The &lt;code&gt;count&lt;/code&gt; key is used to create multple instances according to our previous declared variable &lt;code&gt;instance_count&lt;/code&gt;, and the same apply for the other variables mapings (&lt;code&gt;var.&lt;/code&gt;). The &lt;code&gt;count.index&lt;/code&gt; is used to extract the index of each instance [0,1,2 &amp;hellip; n) and generate a name like &lt;em&gt;hpc-worker-0&lt;/em&gt; for the first instance.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;resource &amp;quot;openstack_compute_instance_v2&amp;quot; &amp;quot;hpc-worker&amp;quot; {
+    count = var.instance_count[&amp;quot;hpc-worker&amp;quot;]
+    name = &amp;quot;${var.node_name[&amp;quot;hpc-worker&amp;quot;]}-${count.index}&amp;quot;
+    image_id = var.image_id[var.image_name[&amp;quot;image&amp;quot;]]
+    flavor_name = var.flavor_name[&amp;quot;hpc-worker&amp;quot;]
+    key_pair = var.key_pub
+    security_groups = var.security_group
+    network {
+        name = var.network
+    }
+    metadata = {
+        ssh_user = var.role_ssh_user[&amp;quot;hpc-worker&amp;quot;],
+        prefer_ipv6 = false,
+        my_server_role = var.node_name[&amp;quot;hpc-worker&amp;quot;],
+	python_bin = &amp;quot;/usr/bin/python3&amp;quot;
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;To create a 3TB volume using the previous volume snapshot, so the data will be migrated to the new volume. Thus, we need to indicate the &lt;code&gt;snapshot_id&lt;/code&gt; which we want to use. If the snpashot is smaller than the new volume, we will need to expand the volume later, otherwise our instance will not use the full volume capacity. To attach the volume to the new instance, we need to provide the &lt;code&gt;instance_id&lt;/code&gt; where we want to attach the volume and the &lt;code&gt;volum_id&lt;/code&gt; to attach.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;resource &amp;quot;openstack_blockstorage_volume_v3&amp;quot; &amp;quot;volume_cassandra_1&amp;quot; {
+    name = &amp;quot;${var.volume_name}-cassandra-1&amp;quot;
+    size = 3000
+    snapshot_id = &amp;quot;f2714817-f9f8-42f3-aa7c-363d7b887983&amp;quot;
+}
+
+resource &amp;quot;openstack_compute_volume_attach_v2&amp;quot; &amp;quot;attach_cassandra_volume_0_to_db_instances&amp;quot; {
+    instance_id = openstack_compute_instance_v2.cassandra[1].id
+    volume_id = openstack_blockstorage_volume_v3.volume_cassandra_1.id
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;upgrading-our-infrastrcutre-with-terraform&#34;&gt;Upgrading our infrastrcutre with Terraform&lt;/h2&gt;
+&lt;p&gt;Once we have defined our desired infrastructure, we can start with the deployment:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;terraform plan
+terraform apply
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;mounting-expanding-disks-and-ploying-docker-swarm-with-ansible&#34;&gt;Mounting, expanding disks and ploying Docker Swarm with Ansible&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;mkdir -p /mnt/data&lt;/li&gt;
+&lt;li&gt;sudo mount /dev/sdb /mnt/data&lt;/li&gt;
+&lt;li&gt;xfs_growfs /dev/sdb&lt;/li&gt;
+&lt;/ul&gt;
 </description>
     </item>
     
